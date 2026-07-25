@@ -205,7 +205,7 @@
   /* ---------- HERO ---------- */
   .hero {
     position: relative;
-    min-height: 88svh;
+    min-height: 92svh;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -257,6 +257,13 @@
     flex-direction: column;
     align-items: center;
     gap: 8px;
+    cursor: pointer;
+    padding: 8px;
+    transition: transform 0.25s ease;
+  }
+
+  .scroll-cue:hover {
+    transform: translateX(-50%) translateY(3px);
   }
 
   .scroll-cue span {
@@ -373,6 +380,29 @@
     height: 1px;
     background: #F7F0DF;
     opacity: 0.55;
+  }
+
+  .hero-reserve-btn {
+    position: relative;
+    z-index: 1;
+    margin-top: 30px;
+    display: inline-block;
+    font-family: var(--font-display);
+    font-style: italic;
+    font-weight: 400;
+    font-size: clamp(13px, 1.6vw, 16px);
+    letter-spacing: 0.05em;
+    color: #534125;
+    background-color: #F7F0DF;
+    padding: 13px 34px;
+    border-radius: 999px;
+    box-shadow: 0 4px 18px rgba(83, 65, 37, 0.35);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  .hero-reserve-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 22px rgba(83, 65, 37, 0.4);
   }
 
   /* ---------- WEEKEND SECTION ---------- */
@@ -503,13 +533,14 @@
         <div class="hero-divider-line"></div>
         <div class="hero-location">Cancún, Mexico</div>
       </div>
+      <a href="#" class="hero-reserve-btn">Request a Reservation</a>
     </div>
-    <div class="scroll-cue">
+    <a class="scroll-cue" href="#weekend" aria-label="Scroll to next section">
       <span>Scroll</span>
       <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
         <path d="M4 8L12 16L20 8" stroke="#F7F0DF" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
       </svg>
-    </div>
+    </a>
   </section>
 
   <section class="weekend" id="weekend">
