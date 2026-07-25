@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Registry — Sydney & Drew</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,400&family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;1,9..144,400&family=Beau+Rivage&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ivory: #F6F1E4;
+    --ivory-soft: #FBF8F1;
+    --ink-green: #26332A;
+    --sand: #D9CBAC;
+    --clay: #BE7350;
+    --sage: #8C9A7C;
+    --font-display: 'Fraunces', serif;
+    --font-body: 'Cormorant Garamond', serif;
+    --font-script: 'Beau Rivage', cursive;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--ivory);
+    color: var(--ink-green);
+    font-family: var(--font-body);
+    font-size: 18px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  a { color: inherit; text-decoration: none; }
+
+  /* ---------- NAV (shared) ---------- */
+  .nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    height: 68px;
+    padding: 0 6vw;
+    background: var(--ink-green);
+  }
+
+  .nav-mark {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    font-family: var(--font-script);
+    font-size: 28px;
+    color: var(--ivory-soft);
+    visibility: hidden;
+  }
+
+  .nav-mark.is-visible {
+    visibility: visible;
+  }
+
+  /* ---------- LOADER (shared) ---------- */
+  .loader {
+    position: fixed;
+    inset: 0;
+    z-index: 500;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--ink-green);
+    transition: background-color 0.7s ease 0.35s;
+  }
+
+  .loader.is-fading {
+    background-color: rgba(38, 51, 42, 0);
+    pointer-events: none;
+  }
+
+  .loader-mark {
+    font-family: var(--font-script);
+    font-size: 72px;
+    color: var(--ivory-soft);
+    will-change: transform;
+    transition: transform 0.85s cubic-bezier(0.65, 0, 0.35, 1);
+  }
+
+  .loader.is-done {
+    display: none;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .loader { transition: none; }
+    .loader-mark { transition: none; }
+  }
+
+  .menu-btn {
+    position: relative;
+    z-index: 1;
+    width: 26px;
+    height: 16px;
+    background: transparent;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  .menu-btn span {
+    display: block;
+    height: 1.5px;
+    width: 100%;
+    background: var(--ivory-soft);
+    transition: transform 0.3s ease, opacity 0.3s ease;
+    transform-origin: center;
+  }
+
+  .menu-btn.is-open span:nth-child(1) {
+    transform: translateY(7px) rotate(45deg);
+  }
+
+  .menu-btn.is-open span:nth-child(2) {
+    opacity: 0;
+  }
+
+  .menu-btn.is-open span:nth-child(3) {
+    transform: translateY(-7px) rotate(-45deg);
+  }
+
+  .menu-panel {
+    position: fixed;
+    top: 68px;
+    left: 6vw;
+    z-index: 99;
+    background: var(--ivory-soft);
+    border: 0.5px solid var(--sand);
+    border-radius: 4px;
+    min-width: 200px;
+    padding: 10px 0;
+    box-shadow: 0 12px 32px rgba(38, 51, 42, 0.14);
+    opacity: 0;
+    transform: translateY(-6px);
+    pointer-events: none;
+    transition: opacity 0.2s ease, transform 0.2s ease;
+  }
+
+  .menu-panel.is-open {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+  }
+
+  .menu-panel a {
+    display: block;
+    padding: 12px 22px;
+    font-size: 14px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ink-green);
+  }
+
+  .menu-panel a:hover {
+    background: var(--ivory);
+  }
+
+  /* ---------- PAGE HEADER ---------- */
+  .page-header {
+    position: relative;
+    min-height: 46vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    background: var(--ink-green);
+    color: var(--ivory-soft);
+    overflow: hidden;
+    padding: 100px 6vw 60px;
+  }
+
+  .page-header-coastline {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0.45;
+  }
+
+  .page-eyebrow {
+    font-size: 13px;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--sand);
+    z-index: 1;
+    margin-bottom: 20px;
+  }
+
+  .page-title {
+    font-family: var(--font-display);
+    font-weight: 400;
+    font-size: clamp(40px, 8vw, 72px);
+    z-index: 1;
+  }
+
+  /* ---------- REGISTRY CONTENT ---------- */
+  .registry {
+    max-width: 640px;
+    margin: 0 auto;
+    padding: 90px 6vw 110px;
+    text-align: center;
+  }
+
+  .registry-intro {
+    font-size: 21px;
+    line-height: 1.65;
+    color: #4a5a4a;
+    max-width: 48ch;
+    margin: 0 auto 56px;
+  }
+
+  .registry-list {
+    display: flex;
+    flex-direction: column;
+    border-top: 1px solid var(--sand);
+  }
+
+  .registry-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 26px 8px;
+    border-bottom: 1px solid var(--sand);
+    transition: padding-left 0.25s ease, color 0.25s ease;
+  }
+
+  .registry-item:hover {
+    padding-left: 18px;
+    color: var(--clay);
+  }
+
+  .registry-name {
+    font-family: var(--font-display);
+    font-weight: 400;
+    font-size: 26px;
+  }
+
+  .registry-arrow {
+    font-family: var(--font-body);
+    font-size: 22px;
+    color: var(--clay);
+  }
+
+  .registry-footnote {
+    margin-top: 44px;
+    font-size: 14px;
+    font-style: italic;
+    color: var(--sage);
+  }
+</style>
+</head>
+<body>
+
+  <div class="loader" id="loader">
+    <div class="loader-mark" id="loaderMark">S &amp; D</div>
+  </div>
+
+  <nav class="nav">
+    <button class="menu-btn" id="menuBtn" aria-label="Open menu" aria-expanded="false" aria-controls="menuPanel">
+      <span></span><span></span><span></span>
+    </button>
+    <a class="nav-mark" id="navMark" href="index.html">S & D</a>
+  </nav>
+
+  <div class="menu-panel" id="menuPanel">
+    <a href="index.html#weekend">Weekend</a>
+    <a href="#">Travel</a>
+    <a href="#">RSVP</a>
+    <a href="registry.html">Registry</a>
+  </div>
+
+  <header class="page-header">
+    <svg class="page-header-coastline" viewBox="0 0 1400 900" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+      <path d="M-50 620 C 200 560, 340 700, 560 640 C 780 580, 900 700, 1120 630 C 1260 590, 1350 640, 1450 600" stroke="#D9CBAC" stroke-width="1.2" fill="none" opacity="0.5"/>
+      <path d="M-50 700 C 220 660, 380 780, 600 720 C 820 660, 960 780, 1180 710 C 1300 680, 1380 720, 1450 690" stroke="#D9CBAC" stroke-width="1" fill="none" opacity="0.35"/>
+      <circle cx="1180" cy="130" r="60" fill="#D9CBAC" opacity="0.12"/>
+    </svg>
+    <div class="page-eyebrow">Sydney &amp; Drew</div>
+    <h1 class="page-title">Registry</h1>
+  </header>
+
+  <section class="registry">
+    <p class="registry-intro">Your presence at our destination wedding is truly gift enough. However, if you'd like to gift us something, we're registered at the following:</p>
+
+    <div class="registry-list">
+      <a class="registry-item" href="#">
+        <span class="registry-name">Zola</span>
+        <span class="registry-arrow">&#8594;</span>
+      </a>
+      <a class="registry-item" href="#">
+        <span class="registry-name">Crate &amp; Barrel</span>
+        <span class="registry-arrow">&#8594;</span>
+      </a>
+      <a class="registry-item" href="#">
+        <span class="registry-name">Amazon</span>
+        <span class="registry-arrow">&#8594;</span>
+      </a>
+    </div>
+
+    <p class="registry-footnote">Links above will direct you to each registry.</p>
+  </section>
+
+  <script>
+    (function () {
+      var loader = document.getElementById('loader');
+      var loaderMark = document.getElementById('loaderMark');
+      var navMark = document.getElementById('navMark');
+      var HOLD_MS = 700;
+      var MOVE_MS = 850;
+
+      function runHandoff() {
+        var startRect = loaderMark.getBoundingClientRect();
+
+        navMark.style.transition = 'none';
+        navMark.classList.add('is-visible');
+        navMark.style.opacity = '0';
+        var endRect = navMark.getBoundingClientRect();
+        navMark.style.opacity = '';
+
+        var endFontSize = parseFloat(getComputedStyle(navMark).fontSize);
+        var startFontSize = parseFloat(getComputedStyle(loaderMark).fontSize);
+        var scale = endFontSize / startFontSize;
+
+        var startCenterX = startRect.left + startRect.width / 2;
+        var startCenterY = startRect.top + startRect.height / 2;
+        var endCenterX = endRect.left + endRect.width / 2;
+        var endCenterY = endRect.top + endRect.height / 2;
+
+        var deltaX = endCenterX - startCenterX;
+        var deltaY = endCenterY - startCenterY;
+
+        navMark.classList.remove('is-visible');
+
+        requestAnimationFrame(function () {
+          loaderMark.style.transform =
+            'translate(' + deltaX + 'px, ' + deltaY + 'px) scale(' + scale + ')';
+          loader.classList.add('is-fading');
+        });
+
+        setTimeout(function () {
+          navMark.classList.add('is-visible');
+          loader.classList.add('is-done');
+        }, MOVE_MS);
+      }
+
+      window.addEventListener('load', function () {
+        setTimeout(runHandoff, HOLD_MS);
+      });
+
+      var menuBtn = document.getElementById('menuBtn');
+      var menuPanel = document.getElementById('menuPanel');
+
+      function closeMenu() {
+        menuBtn.classList.remove('is-open');
+        menuPanel.classList.remove('is-open');
+        menuBtn.setAttribute('aria-expanded', 'false');
+      }
+
+      function toggleMenu() {
+        var willOpen = !menuPanel.classList.contains('is-open');
+        menuBtn.classList.toggle('is-open', willOpen);
+        menuPanel.classList.toggle('is-open', willOpen);
+        menuBtn.setAttribute('aria-expanded', String(willOpen));
+      }
+
+      menuBtn.addEventListener('click', function (e) {
+        e.stopPropagation();
+        toggleMenu();
+      });
+
+      document.addEventListener('click', function (e) {
+        if (!menuPanel.contains(e.target) && !menuBtn.contains(e.target)) {
+          closeMenu();
+        }
+      });
+
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape') closeMenu();
+      });
+    })();
+  </script>
+
+</body>
+</html>
