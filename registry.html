@@ -44,7 +44,7 @@
     z-index: 100;
     display: flex;
     align-items: center;
-    height: 68px;
+    height: 78px;
     padding: 0 6vw;
     background: var(--ink-green);
   }
@@ -54,9 +54,17 @@
     left: 50%;
     top: 50%;
     transform: translate(-50%, -50%);
-    font-family: var(--font-script);
-    font-size: 28px;
-    color: var(--ivory-soft);
+    width: 76px;
+    height: 57px;
+    background-color: var(--ivory-soft);
+    -webkit-mask-image: url('assets/monogram.svg');
+    mask-image: url('assets/monogram.svg');
+    -webkit-mask-size: contain;
+    mask-size: contain;
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    -webkit-mask-position: center;
+    mask-position: center;
     visibility: hidden;
   }
 
@@ -82,9 +90,17 @@
   }
 
   .loader-mark {
-    font-family: var(--font-script);
-    font-size: 72px;
-    color: var(--ivory-soft);
+    width: 260px;
+    height: 195px;
+    background-color: var(--ivory-soft);
+    -webkit-mask-image: url('assets/monogram.svg');
+    mask-image: url('assets/monogram.svg');
+    -webkit-mask-size: contain;
+    mask-size: contain;
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    -webkit-mask-position: center;
+    mask-position: center;
     will-change: transform;
     transition: transform 0.85s cubic-bezier(0.65, 0, 0.35, 1);
   }
@@ -135,7 +151,7 @@
 
   .menu-panel {
     position: fixed;
-    top: 68px;
+    top: 78px;
     left: 6vw;
     z-index: 99;
     background: var(--ivory-soft);
@@ -267,14 +283,14 @@
 <body>
 
   <div class="loader" id="loader">
-    <div class="loader-mark" id="loaderMark">S &amp; D</div>
+    <div class="loader-mark" id="loaderMark"></div>
   </div>
 
   <nav class="nav">
     <button class="menu-btn" id="menuBtn" aria-label="Open menu" aria-expanded="false" aria-controls="menuPanel">
       <span></span><span></span><span></span>
     </button>
-    <a class="nav-mark" id="navMark" href="index.html">S & D</a>
+    <a class="nav-mark" id="navMark" href="index.html" aria-label="Sydney &amp; Drew — Home"></a>
   </nav>
 
   <div class="menu-panel" id="menuPanel">
@@ -332,8 +348,8 @@
         var endRect = navMark.getBoundingClientRect();
         navMark.style.opacity = '';
 
-        var endFontSize = parseFloat(getComputedStyle(navMark).fontSize);
-        var startFontSize = parseFloat(getComputedStyle(loaderMark).fontSize);
+        var endFontSize = endRect.width;
+        var startFontSize = startRect.width;
         var scale = endFontSize / startFontSize;
 
         var startCenterX = startRect.left + startRect.width / 2;

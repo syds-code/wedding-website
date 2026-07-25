@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sydney & Drew — March 2028</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,400&family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;1,9..144,400&family=Beau+Rivage&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ivory: #F6F1E4;
+    --ivory-soft: #FBF8F1;
+    --ink-green: #26332A;
+    --sand: #D9CBAC;
+    --clay: #BE7350;
+    --sage: #8C9A7C;
+    --font-display: 'Fraunces', serif;
+    --font-body: 'Cormorant Garamond', serif;
+    --font-script: 'Beau Rivage', cursive;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--ivory);
+    color: var(--ink-green);
+    font-family: var(--font-body);
+    font-size: 18px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  a { color: inherit; text-decoration: none; }
+
+  /* ---------- NAV ---------- */
+  .nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    height: 78px;
+    padding: 0 6vw;
+    background: var(--ink-green);
+  }
+
+  .nav-mark {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 76px;
+    height: 57px;
+    background-color: var(--ivory-soft);
+    -webkit-mask-image: url('assets/monogram.svg');
+    mask-image: url('assets/monogram.svg');
+    -webkit-mask-size: contain;
+    mask-size: contain;
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    -webkit-mask-position: center;
+    mask-position: center;
+    visibility: hidden;
+  }
+
+  .nav-mark.is-visible {
+    visibility: visible;
+  }
+
+  /* ---------- LOADER ---------- */
+  .loader {
+    position: fixed;
+    inset: 0;
+    z-index: 500;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--ink-green);
+    transition: background-color 0.7s ease 0.35s;
+  }
+
+  .loader.is-fading {
+    background-color: rgba(38, 51, 42, 0);
+    pointer-events: none;
+  }
+
+  .loader-mark {
+    width: 260px;
+    height: 195px;
+    background-color: var(--ivory-soft);
+    -webkit-mask-image: url('assets/monogram.svg');
+    mask-image: url('assets/monogram.svg');
+    -webkit-mask-size: contain;
+    mask-size: contain;
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    -webkit-mask-position: center;
+    mask-position: center;
+    will-change: transform;
+    transition: transform 0.85s cubic-bezier(0.65, 0, 0.35, 1);
+  }
+
+  .loader.is-done {
+    display: none;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .loader { transition: none; }
+    .loader-mark { transition: none; }
+  }
+
+  .menu-btn {
+    position: relative;
+    z-index: 1;
+    width: 26px;
+    height: 16px;
+    background: transparent;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  .menu-btn span {
+    display: block;
+    height: 1.5px;
+    width: 100%;
+    background: var(--ivory-soft);
+    transition: transform 0.3s ease, opacity 0.3s ease;
+    transform-origin: center;
+  }
+
+  .menu-btn.is-open span:nth-child(1) {
+    transform: translateY(7px) rotate(45deg);
+  }
+
+  .menu-btn.is-open span:nth-child(2) {
+    opacity: 0;
+  }
+
+  .menu-btn.is-open span:nth-child(3) {
+    transform: translateY(-7px) rotate(-45deg);
+  }
+
+  .menu-panel {
+    position: fixed;
+    top: 78px;
+    left: 6vw;
+    z-index: 99;
+    background: var(--ivory-soft);
+    border: 0.5px solid var(--sand);
+    border-radius: 4px;
+    min-width: 200px;
+    padding: 10px 0;
+    box-shadow: 0 12px 32px rgba(38, 51, 42, 0.14);
+    opacity: 0;
+    transform: translateY(-6px);
+    pointer-events: none;
+    transition: opacity 0.2s ease, transform 0.2s ease;
+  }
+
+  .menu-panel.is-open {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+  }
+
+  .menu-panel a {
+    display: block;
+    padding: 12px 22px;
+    font-size: 14px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ink-green);
+  }
+
+  .menu-panel a:hover {
+    background: var(--ivory);
+  }
+
+  /* ---------- HERO ---------- */
+  .hero {
+    position: relative;
+    min-height: 100svh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    background: var(--ink-green);
+    color: var(--ivory-soft);
+    overflow: hidden;
+    padding: 100px 6vw 60px;
+  }
+
+  .hero-coastline {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0.55;
+  }
+
+  .hero-eyebrow {
+    font-size: 13px;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--sand);
+    z-index: 1;
+    margin-bottom: 28px;
+  }
+
+  .hero-names {
+    font-family: var(--font-display);
+    font-weight: 400;
+    font-size: clamp(48px, 11vw, 118px);
+    line-height: 0.98;
+    z-index: 1;
+    max-width: 16ch;
+  }
+
+  .hero-amp {
+    font-family: var(--font-script);
+    color: var(--clay);
+    font-size: clamp(40px, 8vw, 88px);
+    display: inline-block;
+    margin: 0 0.08em;
+    transform: translateY(0.08em);
+  }
+
+  .hero-divider {
+    width: 64px;
+    height: 1px;
+    background: var(--sand);
+    margin: 32px 0 24px;
+    z-index: 1;
+  }
+
+  .hero-meta {
+    z-index: 1;
+    font-size: 17px;
+    letter-spacing: 0.06em;
+    color: var(--ivory-soft);
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .hero-meta .place {
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: 22px;
+    color: var(--sand);
+  }
+
+  .hero-cta {
+    z-index: 1;
+    margin-top: 48px;
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .btn {
+    font-size: 12px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    padding: 14px 30px;
+    border-radius: 999px;
+    border: 1px solid var(--sand);
+    transition: all 0.25s ease;
+    cursor: pointer;
+  }
+
+  .btn-primary {
+    background: var(--clay);
+    border-color: var(--clay);
+    color: var(--ivory-soft);
+  }
+
+  .btn-primary:hover { background: #a6613f; }
+  .btn-ghost:hover { background: rgba(246,241,228,0.1); }
+
+  .hero-note {
+    z-index: 1;
+    margin-top: 22px;
+    font-size: 13px;
+    font-style: italic;
+    color: var(--sand);
+    opacity: 0.85;
+  }
+
+  .scroll-cue {
+    position: absolute;
+    bottom: 28px;
+    z-index: 1;
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--sand);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .scroll-line {
+    width: 1px;
+    height: 34px;
+    background: linear-gradient(to bottom, var(--sand), transparent);
+    animation: scrollpulse 2s ease-in-out infinite;
+  }
+
+  @keyframes scrollpulse {
+    0%, 100% { opacity: 0.3; transform: scaleY(0.7); transform-origin: top; }
+    50% { opacity: 1; transform: scaleY(1); transform-origin: top; }
+  }
+
+  /* ---------- WEEKEND SECTION ---------- */
+  .weekend {
+    padding: 120px 6vw;
+    max-width: 1180px;
+    margin: 0 auto;
+  }
+
+  .section-eyebrow {
+    font-size: 13px;
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+    color: var(--clay);
+    text-align: center;
+    margin-bottom: 18px;
+  }
+
+  .section-title {
+    font-family: var(--font-display);
+    font-weight: 400;
+    font-size: clamp(32px, 5vw, 52px);
+    text-align: center;
+    max-width: 20ch;
+    margin: 0 auto 20px;
+  }
+
+  .section-sub {
+    text-align: center;
+    max-width: 52ch;
+    margin: 0 auto 72px;
+    color: #4a5a4a;
+    font-size: 19px;
+  }
+
+  .weekend-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1px;
+    background: var(--sand);
+    border-top: 1px solid var(--sand);
+    border-bottom: 1px solid var(--sand);
+  }
+
+  @media (min-width: 760px) {
+    .weekend-grid { grid-template-columns: repeat(4, 1fr); }
+  }
+
+  .weekend-card {
+    background: var(--ivory);
+    padding: 44px 30px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  .weekend-day {
+    font-size: 12px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--sage);
+  }
+
+  .weekend-card h3 {
+    font-family: var(--font-display);
+    font-weight: 400;
+    font-size: 24px;
+  }
+
+  .weekend-card p {
+    color: #4a5a4a;
+    font-size: 16px;
+    line-height: 1.55;
+  }
+
+  /* ---------- FOOTER TEASER ---------- */
+  .footer-note {
+    text-align: center;
+    padding: 60px 6vw 90px;
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: 20px;
+    color: #4a5a4a;
+  }
+
+  .footer-note span {
+    display: block;
+    font-family: var(--font-body);
+    font-style: normal;
+    font-size: 13px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--clay);
+    margin-top: 14px;
+  }
+</style>
+</head>
+<body>
+
+  <div class="loader" id="loader">
+    <div class="loader-mark" id="loaderMark"></div>
+  </div>
+
+  <nav class="nav">
+    <button class="menu-btn" id="menuBtn" aria-label="Open menu" aria-expanded="false" aria-controls="menuPanel">
+      <span></span><span></span><span></span>
+    </button>
+    <a class="nav-mark" id="navMark" href="index.html" aria-label="Sydney &amp; Drew — Home"></a>
+  </nav>
+
+  <div class="menu-panel" id="menuPanel">
+    <a href="index.html#weekend">Weekend</a>
+    <a href="#">Travel</a>
+    <a href="#">RSVP</a>
+    <a href="registry.html">Registry</a>
+  </div>
+
+  <section class="hero">
+    <svg class="hero-coastline" viewBox="0 0 1400 900" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+      <path d="M-50 620 C 200 560, 340 700, 560 640 C 780 580, 900 700, 1120 630 C 1260 590, 1350 640, 1450 600" stroke="#D9CBAC" stroke-width="1.2" fill="none" opacity="0.5"/>
+      <path d="M-50 700 C 220 660, 380 780, 600 720 C 820 660, 960 780, 1180 710 C 1300 680, 1380 720, 1450 690" stroke="#D9CBAC" stroke-width="1" fill="none" opacity="0.35"/>
+      <path d="M-50 540 C 180 480, 320 600, 540 550 C 760 500, 880 600, 1100 540 C 1240 500, 1340 540, 1450 510" stroke="#BE7350" stroke-width="1" fill="none" opacity="0.3"/>
+      <circle cx="1180" cy="160" r="70" fill="#D9CBAC" opacity="0.12"/>
+    </svg>
+
+    <div class="hero-eyebrow">Riviera Maya · Mexico</div>
+    <h1 class="hero-names">Sydney<span class="hero-amp">&amp;</span>Drew</h1>
+    <div class="hero-divider"></div>
+    <div class="hero-meta">
+      <div>March 2028 · Weekend of the 1st or 8th</div>
+      <div class="place">A three-day gathering by the sea</div>
+    </div>
+
+    <div class="hero-cta">
+      <a class="btn btn-primary" href="#">Save the Date</a>
+      <a class="btn btn-ghost" href="#">Travel Details</a>
+    </div>
+
+    <p class="hero-note">Full details, resort, and booking site coming soon</p>
+
+    <div class="scroll-cue">
+      <span>Scroll</span>
+      <div class="scroll-line"></div>
+    </div>
+  </section>
+
+  <section class="weekend" id="weekend">
+    <div class="section-eyebrow">The Weekend</div>
+    <h2 class="section-title">Come for the wedding, stay for the vacation</h2>
+    <p class="section-sub">Three days on the Riviera Maya — a welcome evening, our ceremony by the water, and a last morning together before everyone heads home.</p>
+
+    <div class="weekend-grid">
+      <div class="weekend-card">
+        <div class="weekend-day">Friday</div>
+        <h3>Welcome</h3>
+        <p>An easy first evening to settle in, meet fellow guests, and toast to the weekend ahead.</p>
+      </div>
+      <div class="weekend-card">
+        <div class="weekend-day">Saturday</div>
+        <h3>Ceremony</h3>
+        <p>We say our vows by the sea, followed by a reception under open sky.</p>
+      </div>
+      <div class="weekend-card">
+        <div class="weekend-day">Sunday</div>
+        <h3>Set Sail</h3>
+        <p>A relaxed group excursion on the water — no schedule to keep, just the coastline.</p>
+      </div>
+      <div class="weekend-card">
+        <div class="weekend-day">Monday</div>
+        <h3>Farewell</h3>
+        <p>Slow mornings and safe travels home, whenever your flight calls.</p>
+      </div>
+    </div>
+  </section>
+
+  <p class="footer-note">
+    We can't wait to celebrate with you.
+    <span>Resort & full itinerary — announced soon</span>
+  </p>
+
+  <script>
+    (function () {
+      var loader = document.getElementById('loader');
+      var loaderMark = document.getElementById('loaderMark');
+      var navMark = document.getElementById('navMark');
+      var HOLD_MS = 700;   // how long the centered logo sits still first
+      var MOVE_MS = 850;   // must match .loader-mark transition duration
+      var FADE_MS = 700;   // must match .loader background transition duration
+
+      function runHandoff() {
+        var startRect = loaderMark.getBoundingClientRect();
+
+        // Briefly reveal navMark (without visually flashing it) so we can
+        // measure exactly where it sits — this is what makes the landing
+        // spot accurate instead of guessed/hardcoded.
+        navMark.style.transition = 'none';
+        navMark.classList.add('is-visible');
+        navMark.style.opacity = '0';
+        var endRect = navMark.getBoundingClientRect();
+        navMark.style.opacity = '';
+
+        var endFontSize = endRect.width;
+        var startFontSize = startRect.width;
+        var scale = endFontSize / startFontSize;
+
+        var startCenterX = startRect.left + startRect.width / 2;
+        var startCenterY = startRect.top + startRect.height / 2;
+        var endCenterX = endRect.left + endRect.width / 2;
+        var endCenterY = endRect.top + endRect.height / 2;
+
+        var deltaX = endCenterX - startCenterX;
+        var deltaY = endCenterY - startCenterY;
+
+        // Hide nav mark again until the exact moment the animation lands
+        navMark.classList.remove('is-visible');
+
+        requestAnimationFrame(function () {
+          loaderMark.style.transform =
+            'translate(' + deltaX + 'px, ' + deltaY + 'px) scale(' + scale + ')';
+          loader.classList.add('is-fading');
+        });
+
+        setTimeout(function () {
+          navMark.classList.add('is-visible');
+          loader.classList.add('is-done');
+        }, MOVE_MS);
+      }
+
+      window.addEventListener('load', function () {
+        setTimeout(runHandoff, HOLD_MS);
+      });
+
+      var menuBtn = document.getElementById('menuBtn');
+      var menuPanel = document.getElementById('menuPanel');
+
+      function closeMenu() {
+        menuBtn.classList.remove('is-open');
+        menuPanel.classList.remove('is-open');
+        menuBtn.setAttribute('aria-expanded', 'false');
+      }
+
+      function toggleMenu() {
+        var willOpen = !menuPanel.classList.contains('is-open');
+        menuBtn.classList.toggle('is-open', willOpen);
+        menuPanel.classList.toggle('is-open', willOpen);
+        menuBtn.setAttribute('aria-expanded', String(willOpen));
+      }
+
+      menuBtn.addEventListener('click', function (e) {
+        e.stopPropagation();
+        toggleMenu();
+      });
+
+      document.addEventListener('click', function (e) {
+        if (!menuPanel.contains(e.target) && !menuBtn.contains(e.target)) {
+          closeMenu();
+        }
+      });
+
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape') closeMenu();
+      });
+    })();
+  </script>
+
+</body>
+</html>
