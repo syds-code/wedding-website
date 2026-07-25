@@ -6,7 +6,7 @@
 <title>Registry — Sydney & Drew</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,400&family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;1,9..144,400&family=Beau+Rivage&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,400&family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;1,9..144,300;1,9..144,400&family=Beau+Rivage&display=swap" rel="stylesheet">
 <style>
   :root {
     --ivory: #F6F1E4;
@@ -15,6 +15,11 @@
     --sand: #D9CBAC;
     --clay: #BE7350;
     --sage: #8C9A7C;
+    --sky-blue: #86B4C4;
+    --walnut: #534125;
+    --ocean-blue: #4E90A2;
+    --powder-blue: #DEEAED;
+    --sky-tint: #CDD1CA;
     --font-display: 'Fraunces', serif;
     --font-body: 'Cormorant Garamond', serif;
     --font-script: 'Beau Rivage', cursive;
@@ -46,7 +51,7 @@
     align-items: center;
     height: 78px;
     padding: 0 6vw;
-    background: var(--ink-green);
+    background: var(--sky-tint);
   }
 
   .nav-mark {
@@ -56,7 +61,7 @@
     transform: translate(-50%, -50%);
     width: 76px;
     height: 57px;
-    background-color: var(--ivory-soft);
+    background-color: var(--walnut);
     -webkit-mask-image: url('assets/monogram.svg');
     mask-image: url('assets/monogram.svg');
     -webkit-mask-size: contain;
@@ -80,19 +85,19 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: var(--ink-green);
+    background-color: var(--sky-tint);
     transition: background-color 0.7s ease 0.35s;
   }
 
   .loader.is-fading {
-    background-color: rgba(38, 51, 42, 0);
+    background-color: rgba(205, 209, 202, 0);
     pointer-events: none;
   }
 
   .loader-mark {
     width: 260px;
     height: 195px;
-    background-color: var(--ivory-soft);
+    background-color: var(--walnut);
     -webkit-mask-image: url('assets/monogram.svg');
     mask-image: url('assets/monogram.svg');
     -webkit-mask-size: contain;
@@ -132,7 +137,7 @@
     display: block;
     height: 1.5px;
     width: 100%;
-    background: var(--ivory-soft);
+    background: var(--walnut);
     transition: transform 0.3s ease, opacity 0.3s ease;
     transform-origin: center;
   }

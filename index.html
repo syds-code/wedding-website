@@ -6,7 +6,7 @@
 <title>Sydney & Drew — March 2028</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,400&family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;1,9..144,400&family=Beau+Rivage&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,400&family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;1,9..144,300;1,9..144,400&family=Beau+Rivage&display=swap" rel="stylesheet">
 <style>
   :root {
     --ivory: #F6F1E4;
@@ -15,6 +15,11 @@
     --sand: #D9CBAC;
     --clay: #BE7350;
     --sage: #8C9A7C;
+    --sky-blue: #86B4C4;
+    --walnut: #534125;
+    --ocean-blue: #4E90A2;
+    --powder-blue: #DEEAED;
+    --sky-tint: #CDD1CA;
     --font-display: 'Fraunces', serif;
     --font-body: 'Cormorant Garamond', serif;
     --font-script: 'Beau Rivage', cursive;
@@ -35,6 +40,18 @@
 
   a { color: inherit; text-decoration: none; }
 
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
+
   /* ---------- NAV ---------- */
   .nav {
     position: fixed;
@@ -46,7 +63,7 @@
     align-items: center;
     height: 78px;
     padding: 0 6vw;
-    background: var(--ink-green);
+    background: var(--sky-tint);
   }
 
   .nav-mark {
@@ -56,7 +73,7 @@
     transform: translate(-50%, -50%);
     width: 76px;
     height: 57px;
-    background-color: var(--ivory-soft);
+    background-color: var(--walnut);
     -webkit-mask-image: url('assets/monogram.svg');
     mask-image: url('assets/monogram.svg');
     -webkit-mask-size: contain;
@@ -80,19 +97,19 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: var(--ink-green);
+    background-color: var(--sky-tint);
     transition: background-color 0.7s ease 0.35s;
   }
 
   .loader.is-fading {
-    background-color: rgba(38, 51, 42, 0);
+    background-color: rgba(205, 209, 202, 0);
     pointer-events: none;
   }
 
   .loader-mark {
     width: 260px;
     height: 195px;
-    background-color: var(--ivory-soft);
+    background-color: var(--walnut);
     -webkit-mask-image: url('assets/monogram.svg');
     mask-image: url('assets/monogram.svg');
     -webkit-mask-size: contain;
@@ -132,7 +149,7 @@
     display: block;
     height: 1.5px;
     width: 100%;
-    background: var(--ivory-soft);
+    background: var(--walnut);
     transition: transform 0.3s ease, opacity 0.3s ease;
     transform-origin: center;
   }
@@ -194,134 +211,104 @@
     align-items: center;
     justify-content: center;
     text-align: center;
-    background: var(--ink-green);
+    background: var(--sky-blue);
     color: var(--ivory-soft);
     overflow: hidden;
     padding: 100px 6vw 60px;
   }
 
-  .hero-coastline {
+  .hero-photo {
     position: absolute;
     inset: 0;
     width: 100%;
     height: 100%;
-    opacity: 0.55;
+    object-fit: cover;
+    object-position: center 65%;
+    z-index: 0;
   }
 
-  .hero-eyebrow {
-    font-size: 13px;
-    letter-spacing: 0.28em;
-    text-transform: uppercase;
-    color: var(--sand);
-    z-index: 1;
-    margin-bottom: 28px;
-  }
-
-  .hero-names {
-    font-family: var(--font-display);
-    font-weight: 400;
-    font-size: clamp(48px, 11vw, 118px);
-    line-height: 0.98;
-    z-index: 1;
-    max-width: 16ch;
-  }
-
-  .hero-amp {
-    font-family: var(--font-script);
-    color: var(--clay);
-    font-size: clamp(40px, 8vw, 88px);
-    display: inline-block;
-    margin: 0 0.08em;
-    transform: translateY(0.08em);
-  }
-
-  .hero-divider {
-    width: 64px;
-    height: 1px;
-    background: var(--sand);
-    margin: 32px 0 24px;
-    z-index: 1;
-  }
-
-  .hero-meta {
-    z-index: 1;
-    font-size: 17px;
-    letter-spacing: 0.06em;
-    color: var(--ivory-soft);
-    display: flex;
-    flex-direction: column;
-    gap: 6px;
-  }
-
-  .hero-meta .place {
-    font-family: var(--font-display);
-    font-style: italic;
-    font-size: 22px;
-    color: var(--sand);
-  }
-
-  .hero-cta {
-    z-index: 1;
-    margin-top: 48px;
-    display: flex;
-    gap: 16px;
-    flex-wrap: wrap;
-    justify-content: center;
-  }
-
-  .btn {
-    font-size: 12px;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    padding: 14px 30px;
-    border-radius: 999px;
-    border: 1px solid var(--sand);
-    transition: all 0.25s ease;
-    cursor: pointer;
-  }
-
-  .btn-primary {
-    background: var(--clay);
-    border-color: var(--clay);
-    color: var(--ivory-soft);
-  }
-
-  .btn-primary:hover { background: #a6613f; }
-  .btn-ghost:hover { background: rgba(246,241,228,0.1); }
-
-  .hero-note {
-    z-index: 1;
-    margin-top: 22px;
-    font-size: 13px;
-    font-style: italic;
-    color: var(--sand);
-    opacity: 0.85;
-  }
-
-  .scroll-cue {
+  .hero-scrim {
     position: absolute;
-    bottom: 28px;
+    inset: 0;
+    background: linear-gradient(
+      180deg,
+      rgba(83, 65, 37, 0.32) 0%,
+      rgba(83, 65, 37, 0.18) 35%,
+      rgba(83, 65, 37, 0.34) 100%
+    );
     z-index: 1;
-    font-size: 11px;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: var(--sand);
+  }
+
+  .hero-content {
+    position: relative;
+    z-index: 2;
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 8px;
   }
 
-  .scroll-line {
-    width: 1px;
-    height: 34px;
-    background: linear-gradient(to bottom, var(--sand), transparent);
-    animation: scrollpulse 2s ease-in-out infinite;
+  @media (max-width: 760px) {
+    .hero-photo {
+      object-position: 28% 58%;
+    }
   }
 
-  @keyframes scrollpulse {
-    0%, 100% { opacity: 0.3; transform: scaleY(0.7); transform-origin: top; }
-    50% { opacity: 1; transform: scaleY(1); transform-origin: top; }
+  .hero-wedding-of {
+    position: relative;
+    font-family: var(--font-display);
+    font-style: italic;
+    font-weight: 400;
+    font-size: clamp(20px, 2.8vw, 30px);
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: #F7F0DF;
+    z-index: 1;
+    margin-bottom: 18px;
+    text-shadow: 0 1px 8px rgba(83, 65, 37, 0.4);
+  }
+
+  .hero-names-oneline,
+  .hero-names-stacked {
+    position: relative;
+    background-color: #F7F0DF;
+    filter: drop-shadow(0 2px 16px rgba(83, 65, 37, 0.4));
+  }
+
+  .hero-names-oneline {
+    -webkit-mask-image: url('assets/names-oneline.svg');
+    mask-image: url('assets/names-oneline.svg');
+    -webkit-mask-size: contain;
+    mask-size: contain;
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    -webkit-mask-position: center;
+    mask-position: center;
+    width: min(92vw, 820px);
+    aspect-ratio: 1463 / 387;
+    display: block;
+  }
+
+  .hero-names-stacked {
+    -webkit-mask-image: url('assets/names-stacked.svg');
+    mask-image: url('assets/names-stacked.svg');
+    -webkit-mask-size: contain;
+    mask-size: contain;
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    -webkit-mask-position: center;
+    mask-position: center;
+    width: min(74vw, 380px);
+    aspect-ratio: 932 / 864;
+    display: none;
+  }
+
+  @media (max-width: 760px) {
+    .hero-names-oneline {
+      display: none;
+    }
+    .hero-names-stacked {
+      display: block;
+    }
   }
 
   /* ---------- WEEKEND SECTION ---------- */
@@ -440,31 +427,13 @@
   </div>
 
   <section class="hero">
-    <svg class="hero-coastline" viewBox="0 0 1400 900" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
-      <path d="M-50 620 C 200 560, 340 700, 560 640 C 780 580, 900 700, 1120 630 C 1260 590, 1350 640, 1450 600" stroke="#D9CBAC" stroke-width="1.2" fill="none" opacity="0.5"/>
-      <path d="M-50 700 C 220 660, 380 780, 600 720 C 820 660, 960 780, 1180 710 C 1300 680, 1380 720, 1450 690" stroke="#D9CBAC" stroke-width="1" fill="none" opacity="0.35"/>
-      <path d="M-50 540 C 180 480, 320 600, 540 550 C 760 500, 880 600, 1100 540 C 1240 500, 1340 540, 1450 510" stroke="#BE7350" stroke-width="1" fill="none" opacity="0.3"/>
-      <circle cx="1180" cy="160" r="70" fill="#D9CBAC" opacity="0.12"/>
-    </svg>
-
-    <div class="hero-eyebrow">Riviera Maya · Mexico</div>
-    <h1 class="hero-names">Sydney<span class="hero-amp">&amp;</span>Drew</h1>
-    <div class="hero-divider"></div>
-    <div class="hero-meta">
-      <div>March 2028 · Weekend of the 1st or 8th</div>
-      <div class="place">A three-day gathering by the sea</div>
-    </div>
-
-    <div class="hero-cta">
-      <a class="btn btn-primary" href="#">Save the Date</a>
-      <a class="btn btn-ghost" href="#">Travel Details</a>
-    </div>
-
-    <p class="hero-note">Full details, resort, and booking site coming soon</p>
-
-    <div class="scroll-cue">
-      <span>Scroll</span>
-      <div class="scroll-line"></div>
+    <img class="hero-photo" src="assets/hero-watercolor.jpg" alt="Watercolor coastline of the Riviera Maya">
+    <div class="hero-scrim"></div>
+    <div class="hero-content">
+      <div class="hero-wedding-of">the wedding of</div>
+      <h1 class="sr-only">Sydney &amp; Drew</h1>
+      <div class="hero-names-oneline" aria-hidden="true"></div>
+      <div class="hero-names-stacked" aria-hidden="true"></div>
     </div>
   </section>
 
