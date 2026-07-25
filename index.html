@@ -205,7 +205,7 @@
   /* ---------- HERO ---------- */
   .hero {
     position: relative;
-    min-height: 100svh;
+    min-height: 88svh;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -245,6 +245,42 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+  }
+
+  .scroll-cue {
+    position: absolute;
+    bottom: 26px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .scroll-cue span {
+    font-size: 11px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: #F7F0DF;
+    text-shadow: 0 1px 6px rgba(83, 65, 37, 0.5);
+  }
+
+  .scroll-cue svg {
+    width: 16px;
+    height: 16px;
+    animation: scrollBounce 1.8s ease-in-out infinite;
+    filter: drop-shadow(0 1px 4px rgba(83, 65, 37, 0.5));
+  }
+
+  @keyframes scrollBounce {
+    0%, 100% { transform: translateY(0); opacity: 0.6; }
+    50% { transform: translateY(7px); opacity: 1; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .scroll-cue svg { animation: none; }
   }
 
   @media (max-width: 760px) {
@@ -309,6 +345,34 @@
     .hero-names-stacked {
       display: block;
     }
+  }
+
+  .hero-details {
+    position: relative;
+    z-index: 1;
+    margin-top: 28px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .hero-date,
+  .hero-location {
+    font-family: var(--font-display);
+    font-style: italic;
+    font-weight: 400;
+    font-size: clamp(15px, 1.9vw, 19px);
+    letter-spacing: 0.06em;
+    color: #F7F0DF;
+    text-shadow: 0 1px 6px rgba(83, 65, 37, 0.45);
+  }
+
+  .hero-divider-line {
+    width: 34px;
+    height: 1px;
+    background: #F7F0DF;
+    opacity: 0.55;
   }
 
   /* ---------- WEEKEND SECTION ---------- */
@@ -434,6 +498,17 @@
       <h1 class="sr-only">Sydney &amp; Drew</h1>
       <div class="hero-names-oneline" aria-hidden="true"></div>
       <div class="hero-names-stacked" aria-hidden="true"></div>
+      <div class="hero-details">
+        <div class="hero-date">March 4th, 2028</div>
+        <div class="hero-divider-line"></div>
+        <div class="hero-location">Cancún, Mexico</div>
+      </div>
+    </div>
+    <div class="scroll-cue">
+      <span>Scroll</span>
+      <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <path d="M4 8L12 16L20 8" stroke="#F7F0DF" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
     </div>
   </section>
 
