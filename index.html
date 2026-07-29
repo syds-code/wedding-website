@@ -15,6 +15,7 @@
     --sand: #D9CBAC;
     --clay: #BE7350;
     --sage: #8C9A7C;
+    --greige: #B3A58F;
     --sky-blue: #86B4C4;
     --walnut: #534125;
     --ocean-blue: #4E90A2;
@@ -405,77 +406,143 @@
     box-shadow: 0 6px 22px rgba(83, 65, 37, 0.4);
   }
 
-  /* ---------- WEEKEND SECTION ---------- */
-  .weekend {
-    padding: 120px 6vw;
-    max-width: 1180px;
-    margin: 0 auto;
-  }
-
-  .section-eyebrow {
-    font-size: 13px;
-    letter-spacing: 0.24em;
-    text-transform: uppercase;
-    color: var(--clay);
-    text-align: center;
-    margin-bottom: 18px;
-  }
-
-  .section-title {
-    font-family: var(--font-display);
-    font-weight: 400;
-    font-size: clamp(32px, 5vw, 52px);
-    text-align: center;
-    max-width: 20ch;
-    margin: 0 auto 20px;
-  }
-
-  .section-sub {
-    text-align: center;
-    max-width: 52ch;
-    margin: 0 auto 72px;
-    color: #4a5a4a;
-    font-size: 19px;
-  }
-
-  .weekend-grid {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 1px;
-    background: var(--sand);
-    border-top: 1px solid var(--sand);
-    border-bottom: 1px solid var(--sand);
-  }
-
-  @media (min-width: 760px) {
-    .weekend-grid { grid-template-columns: repeat(4, 1fr); }
-  }
-
-  .weekend-card {
+  /* ---------- GALLERY ---------- */
+  .gallery {
     background: var(--ivory);
-    padding: 44px 30px;
+    padding: 40px 6vw;
+  }
+
+  .gallery-frame {
+    position: relative;
+    max-width: 900px;
+    margin: 0 auto;
+    border-radius: 4px;
+    overflow: hidden;
+    box-shadow: 0 18px 48px rgba(83, 65, 37, 0.22);
+  }
+
+  .gallery-track {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 3 / 2;
+    background: var(--greige);
+  }
+
+  .gallery-slide {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+    pointer-events: none;
+  }
+
+  .gallery-slide.is-active {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  .gallery-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 2;
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    background: rgba(83, 65, 37, 0.55);
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.2s ease;
+  }
+
+  .gallery-arrow:hover {
+    background: rgba(83, 65, 37, 0.8);
+  }
+
+  .gallery-arrow svg {
+    width: 18px;
+    height: 18px;
+  }
+
+  .gallery-arrow.prev { left: 14px; }
+  .gallery-arrow.next { right: 14px; }
+
+  /* ---------- MEET US IN MEXICO ---------- */
+  .meet-mexico {
+    background: var(--greige);
+    padding: 100px 6vw;
+    text-align: center;
+  }
+
+  .meet-mexico-wrap {
+    margin: 0 auto 28px;
     display: flex;
     flex-direction: column;
-    gap: 14px;
+    align-items: center;
   }
 
-  .weekend-day {
-    font-size: 12px;
-    letter-spacing: 0.16em;
+  .meet-mexico-eyebrow {
+    font-family: var(--font-display);
+    font-style: italic;
+    font-weight: 400;
+    font-size: clamp(20px, 3vw, 28px);
+    letter-spacing: 0.14em;
     text-transform: uppercase;
-    color: var(--sage);
+    color: #F7F0DF;
+    margin-bottom: 10px;
   }
 
-  .weekend-card h3 {
+  .meet-mexico-mark {
+    width: min(50vw, 300px);
+    aspect-ratio: 1175 / 411;
+    background-color: #F7F0DF;
+    -webkit-mask-image: url('assets/mexico-script.svg');
+    mask-image: url('assets/mexico-script.svg');
+    -webkit-mask-size: contain;
+    mask-size: contain;
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    -webkit-mask-position: center;
+    mask-position: center;
+  }
+
+  .meet-mexico-blurb {
+    max-width: 62ch;
+    margin: 0 auto;
     font-family: var(--font-display);
     font-weight: 400;
-    font-size: 24px;
+    font-size: 18px;
+    line-height: 1.75;
+    color: #534125;
+    text-align: left;
   }
 
-  .weekend-card p {
-    color: #4a5a4a;
+  .meet-mexico-blurb p {
+    margin: 0 0 20px;
+  }
+
+  .meet-mexico-blurb p:last-child {
+    margin-bottom: 0;
+  }
+
+  .meet-mexico-blurb .lede {
+    font-style: italic;
+    font-size: 22px;
+    text-align: center;
+    margin-bottom: 28px;
+  }
+
+  .meet-mexico-blurb .fine-print {
+    font-style: italic;
     font-size: 16px;
-    line-height: 1.55;
+    text-align: center;
+    color: #6b5936;
   }
 
   /* ---------- FOOTER TEASER ---------- */
@@ -514,7 +581,7 @@
   </nav>
 
   <div class="menu-panel" id="menuPanel">
-    <a href="index.html#weekend">Weekend</a>
+    <a href="#">Weekend</a>
     <a href="#">Travel</a>
     <a href="#">RSVP</a>
     <a href="registry.html">Registry</a>
@@ -535,7 +602,7 @@
       </div>
       <a href="#" class="hero-reserve-btn">Request a Reservation</a>
     </div>
-    <a class="scroll-cue" href="#weekend" aria-label="Scroll to next section">
+    <a class="scroll-cue" href="#meet-mexico" aria-label="Scroll to next section">
       <span>Scroll</span>
       <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
         <path d="M4 8L12 16L20 8" stroke="#F7F0DF" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
@@ -543,32 +610,49 @@
     </a>
   </section>
 
-  <section class="weekend" id="weekend">
-    <div class="section-eyebrow">The Weekend</div>
-    <h2 class="section-title">Come for the wedding, stay for the vacation</h2>
-    <p class="section-sub">Three days on the Riviera Maya — a welcome evening, our ceremony by the water, and a last morning together before everyone heads home.</p>
+  <section class="gallery">
+    <div class="gallery-frame">
+      <div class="gallery-track" id="galleryTrack">
+        <img class="gallery-slide is-active" src="assets/gallery/gallery-1.jpg" alt="Sydney and Drew, photo 1">
+        <img class="gallery-slide" src="assets/gallery/gallery-4.jpg" alt="Sydney and Drew, photo 2">
+        <img class="gallery-slide" src="assets/gallery/gallery-8.jpg" alt="Sydney and Drew, photo 3">
+        <img class="gallery-slide" src="assets/gallery/gallery-2.jpg" alt="Sydney and Drew, photo 4">
+        <img class="gallery-slide" src="assets/gallery/gallery-11.jpg" alt="Sydney and Drew, photo 5">
+        <img class="gallery-slide" src="assets/gallery/gallery-6.jpg" alt="Sydney and Drew, photo 6">
+        <img class="gallery-slide" src="assets/gallery/gallery-9.jpg" alt="Sydney and Drew, photo 7">
+        <img class="gallery-slide" src="assets/gallery/gallery-5.jpg" alt="Sydney and Drew, photo 8">
+        <img class="gallery-slide" src="assets/gallery/gallery-3.jpg" alt="Sydney and Drew, photo 9">
+        <img class="gallery-slide" src="assets/gallery/gallery-7.jpg" alt="Sydney and Drew, photo 10">
+        <img class="gallery-slide" src="assets/gallery/gallery-10.jpg" alt="Sydney and Drew, photo 11">
+      </div>
+      <button class="gallery-arrow prev" id="galleryPrev" aria-label="Previous photo">
+        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M15 5L8 12L15 19" stroke="#F7F0DF" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+      <button class="gallery-arrow next" id="galleryNext" aria-label="Next photo">
+        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M9 5L16 12L9 19" stroke="#F7F0DF" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+    </div>
+  </section>
 
-    <div class="weekend-grid">
-      <div class="weekend-card">
-        <div class="weekend-day">Friday</div>
-        <h3>Welcome</h3>
-        <p>An easy first evening to settle in, meet fellow guests, and toast to the weekend ahead.</p>
-      </div>
-      <div class="weekend-card">
-        <div class="weekend-day">Saturday</div>
-        <h3>Ceremony</h3>
-        <p>We say our vows by the sea, followed by a reception under open sky.</p>
-      </div>
-      <div class="weekend-card">
-        <div class="weekend-day">Sunday</div>
-        <h3>Set Sail</h3>
-        <p>A relaxed group excursion on the water — no schedule to keep, just the coastline.</p>
-      </div>
-      <div class="weekend-card">
-        <div class="weekend-day">Monday</div>
-        <h3>Farewell</h3>
-        <p>Slow mornings and safe travels home, whenever your flight calls.</p>
-      </div>
+  <section class="meet-mexico" id="meet-mexico">
+    <div class="meet-mexico-wrap">
+      <div class="meet-mexico-eyebrow">meet us in</div>
+      <div class="meet-mexico-mark" role="img" aria-label="Mexico"></div>
+    </div>
+    <div class="meet-mexico-blurb">
+      <p>Please join us on <strong>Friday, February 26th, 2027</strong>, in celebrating our wedding at <strong>Secrets Akumal Riviera Maya All-Inclusive Resort</strong> in Mexico!</p>
+
+      <p>Come enjoy a great all-inclusive resort experience where all your meals and drinks are included with your stay while you celebrate our wedding with us.</p>
+
+      <p>To take care of all your travel plans, we have been working closely with a travel agency that specializes in destination weddings, <strong>Vibe Thrive Travel</strong>. With their help, we have reserved a block of rooms with special group rates at the resort.</p>
+
+      <p>To take advantage of the discounted pricing, all guests must have their hotel reservations made by <strong>September 1st</strong> and paid in full by <strong>October 10th, 2026</strong>.</p>
+
+      <p>We are currently holding most rooms from <strong>February 24th&ndash;28th, 2027</strong>; however, you may book any dates you wish through this website (if we are not holding the room, our travel agent will request for it to be added to our group). <em>Note, there is a 3-night minimum stay required by the resort.</em></p>
+
+      <p>You may also use this site to book your transportation to and from the resort/airport. All flights should be purchased separately with your airline of choice.</p>
+
+      <p class="fine-print">Please reach out to Vibe Thrive Travel with any travel questions: info1@vibethrivetravel.com</p>
     </div>
   </section>
 
@@ -659,6 +743,45 @@
       document.addEventListener('keydown', function (e) {
         if (e.key === 'Escape') closeMenu();
       });
+
+      var slides = document.querySelectorAll('.gallery-slide');
+      var prevBtn = document.getElementById('galleryPrev');
+      var nextBtn = document.getElementById('galleryNext');
+      var track = document.getElementById('galleryTrack');
+      var current = 0;
+
+      function showSlide(index) {
+        slides[current].classList.remove('is-active');
+        current = (index + slides.length) % slides.length;
+        slides[current].classList.add('is-active');
+      }
+
+      if (prevBtn && nextBtn) {
+        prevBtn.addEventListener('click', function () { showSlide(current - 1); });
+        nextBtn.addEventListener('click', function () { showSlide(current + 1); });
+      }
+
+      if (track) {
+        var touchStartX = 0;
+        var touchEndX = 0;
+        var SWIPE_THRESHOLD = 40;
+
+        track.addEventListener('touchstart', function (e) {
+          touchStartX = e.changedTouches[0].screenX;
+        }, { passive: true });
+
+        track.addEventListener('touchend', function (e) {
+          touchEndX = e.changedTouches[0].screenX;
+          var delta = touchEndX - touchStartX;
+          if (Math.abs(delta) > SWIPE_THRESHOLD) {
+            if (delta < 0) {
+              showSlide(current + 1);
+            } else {
+              showSlide(current - 1);
+            }
+          }
+        }, { passive: true });
+      }
     })();
   </script>
 
