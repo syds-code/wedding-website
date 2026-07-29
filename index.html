@@ -224,7 +224,7 @@
     width: 100%;
     height: 100%;
     object-fit: cover;
-    object-position: center 65%;
+    object-position: center 35%;
     z-index: 0;
   }
 
@@ -748,7 +748,10 @@
       var prevBtn = document.getElementById('galleryPrev');
       var nextBtn = document.getElementById('galleryNext');
       var track = document.getElementById('galleryTrack');
+      var galleryFrame = document.querySelector('.gallery-frame');
       var current = 0;
+      var AUTOPLAY_MS = 5000;
+      var autoplayTimer = null;
 
       function showSlide(index) {
         slides[current].classList.remove('is-active');
@@ -756,9 +759,28 @@
         slides[current].classList.add('is-active');
       }
 
+      function startAutoplay() {
+        stopAutoplay();
+        autoplayTimer = setInterval(function () {
+          showSlide(current + 1);
+        }, AUTOPLAY_MS);
+      }
+
+      function stopAutoplay() {
+        if (autoplayTimer) {
+          clearInterval(autoplayTimer);
+          autoplayTimer = null;
+        }
+      }
+
+      function goToSlide(index) {
+        showSlide(index);
+        startAutoplay(); // reset the timer so it doesn't jump right after a manual change
+      }
+
       if (prevBtn && nextBtn) {
-        prevBtn.addEventListener('click', function () { showSlide(current - 1); });
-        nextBtn.addEventListener('click', function () { showSlide(current + 1); });
+        prevBtn.addEventListener('click', function () { goToSlide(current - 1); });
+        nextBtn.addEventListener('click', function () { goToSlide(current + 1); });
       }
 
       if (track) {
@@ -775,12 +797,21 @@
           var delta = touchEndX - touchStartX;
           if (Math.abs(delta) > SWIPE_THRESHOLD) {
             if (delta < 0) {
-              showSlide(current + 1);
+              goToSlide(current + 1);
             } else {
-              showSlide(current - 1);
+              goToSlide(current - 1);
             }
           }
         }, { passive: true });
+      }
+
+      if (slides.length > 1) {
+        startAutoplay();
+
+        if (galleryFrame) {
+          galleryFrame.addEventListener('mouseenter', stopAutoplay);
+          galleryFrame.addEventListener('mouseleave', startAutoplay);
+        }
       }
     })();
   </script>
