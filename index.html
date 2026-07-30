@@ -67,6 +67,57 @@
     background: var(--sky-tint);
   }
 
+  .payment-banner {
+    margin-top: 78px;
+    background: var(--sage);
+    color: #F6F1E4;
+    padding: 16px 6vw;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 14px;
+  }
+
+  @media (max-width: 480px) {
+    .payment-banner {
+      gap: 10px;
+    }
+
+    .payment-banner-btn {
+      padding: 10px 14px;
+      font-size: 13px;
+    }
+  }
+
+  .payment-banner-text {
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: clamp(14px, 3.4vw, 16px);
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    font-weight: 500;
+    white-space: nowrap;
+  }
+
+  .payment-banner-btn {
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: 14px;
+    letter-spacing: 0.05em;
+    color: #F6F1E4;
+    border: 1px solid #F6F1E4;
+    padding: 10px 24px;
+    border-radius: 999px;
+    white-space: nowrap;
+    transition: background 0.2s ease, color 0.2s ease;
+  }
+
+  .payment-banner-btn:hover {
+    background: #F6F1E4;
+    color: var(--sage);
+  }
+
   .nav-mark {
     position: absolute;
     left: 50%;
@@ -272,7 +323,7 @@
     font-size: 11px;
     letter-spacing: 0.22em;
     text-transform: uppercase;
-    color: #F7F0DF;
+    color: #F6F1E4;
     text-shadow: 0 1px 6px rgba(83, 65, 37, 0.5);
   }
 
@@ -310,7 +361,7 @@
     font-size: clamp(20px, 2.8vw, 30px);
     letter-spacing: 0.14em;
     text-transform: uppercase;
-    color: #F7F0DF;
+    color: #F6F1E4;
     z-index: 1;
     margin-top: 36px;
     margin-bottom: 2px;
@@ -320,7 +371,7 @@
   .hero-names-oneline,
   .hero-names-stacked {
     position: relative;
-    background-color: #F7F0DF;
+    background-color: #F6F1E4;
     filter: drop-shadow(0 2px 16px rgba(83, 65, 37, 0.4));
   }
 
@@ -378,14 +429,14 @@
     font-weight: 400;
     font-size: clamp(15px, 1.9vw, 19px);
     letter-spacing: 0.06em;
-    color: #F7F0DF;
+    color: #F6F1E4;
     text-shadow: 0 1px 6px rgba(83, 65, 37, 0.45);
   }
 
   .hero-divider-line {
     width: 1px;
     height: 18px;
-    background: #F7F0DF;
+    background: #F6F1E4;
     opacity: 0.55;
   }
 
@@ -400,7 +451,7 @@
     font-size: clamp(13px, 1.6vw, 16px);
     letter-spacing: 0.05em;
     color: #534125;
-    background-color: #F7F0DF;
+    background-color: #F6F1E4;
     padding: 13px 34px;
     border-radius: 999px;
     box-shadow: 0 4px 18px rgba(83, 65, 37, 0.35);
@@ -508,14 +559,14 @@
     font-size: clamp(20px, 3vw, 28px);
     letter-spacing: 0.14em;
     text-transform: uppercase;
-    color: #F7F0DF;
+    color: #F6F1E4;
     margin-bottom: 10px;
   }
 
   .meet-mexico-mark {
     width: min(50vw, 300px);
     aspect-ratio: 1175 / 411;
-    background-color: #F7F0DF;
+    background-color: #F6F1E4;
     -webkit-mask-image: url('assets/mexico-script.svg');
     mask-image: url('assets/mexico-script.svg');
     -webkit-mask-size: contain;
@@ -601,6 +652,11 @@
     <a class="nav-mark" id="navMark" href="index.html" aria-label="Sydney &amp; Drew — Home"></a>
   </nav>
 
+  <div class="payment-banner" id="paymentBanner">
+    <div class="payment-banner-text" id="paymentBannerText">Submit final payment by January 1st, 2028</div>
+    <a href="#" class="payment-banner-btn">Make Payment</a>
+  </div>
+
   <div class="menu-panel" id="menuPanel">
     <a href="#">Weekend</a>
     <a href="#">Travel</a>
@@ -626,7 +682,7 @@
     <a class="scroll-cue" href="#gallery" aria-label="Scroll to next section">
       <span>Scroll</span>
       <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-        <path d="M4 8L12 16L20 8" stroke="#F7F0DF" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M4 8L12 16L20 8" stroke="#F6F1E4" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
       </svg>
     </a>
   </section>
@@ -647,10 +703,10 @@
         <img class="gallery-slide" src="assets/gallery/gallery-10.jpg" alt="Sydney and Drew, photo 11">
       </div>
       <button class="gallery-arrow prev" id="galleryPrev" aria-label="Previous photo">
-        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M15 5L8 12L15 19" stroke="#F7F0DF" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M15 5L8 12L15 19" stroke="#F6F1E4" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
       </button>
       <button class="gallery-arrow next" id="galleryNext" aria-label="Next photo">
-        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M9 5L16 12L9 19" stroke="#F7F0DF" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M9 5L16 12L9 19" stroke="#F6F1E4" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
       </button>
     </div>
   </section>
@@ -684,6 +740,30 @@
 
   <script>
     (function () {
+      // ---------- PAYMENT BANNER ----------
+      // For now: FORCE_SHOW makes the banner always visible so you can see/style it.
+      // When ready to go live with real date logic: set FORCE_SHOW = false, and
+      // fill in TRIGGER_DATE (when the banner should start appearing) and
+      // DUE_DATE (the actual payment deadline shown in the text).
+      var FORCE_SHOW = true;
+      var TRIGGER_DATE = new Date('2027-11-01'); // banner starts showing on this date
+      var DUE_DATE_TEXT = '1/1/2028';   // deadline text shown to guests
+
+      (function () {
+        var banner = document.getElementById('paymentBanner');
+        var bannerText = document.getElementById('paymentBannerText');
+        if (!banner) return;
+
+        var shouldShow = FORCE_SHOW || (new Date() >= TRIGGER_DATE);
+
+        if (shouldShow) {
+          bannerText.textContent = 'Submit final payment by ' + DUE_DATE_TEXT;
+          banner.style.display = 'flex';
+        } else {
+          banner.style.display = 'none';
+        }
+      })();
+
       var loader = document.getElementById('loader');
       var loaderMark = document.getElementById('loaderMark');
       var navMark = document.getElementById('navMark');
