@@ -371,18 +371,6 @@
     gap: 10px;
   }
 
-  @media (min-width: 761px) {
-    .hero-details {
-      flex-direction: row;
-      gap: 16px;
-    }
-
-    .hero-divider-line {
-      width: 1px;
-      height: 18px;
-    }
-  }
-
   .hero-date,
   .hero-location {
     font-family: var(--font-display);
@@ -399,6 +387,18 @@
     height: 1px;
     background: #F7F0DF;
     opacity: 0.55;
+  }
+
+  @media (min-width: 761px) {
+    .hero-details {
+      flex-direction: row;
+      gap: 16px;
+    }
+
+    .hero-divider-line {
+      width: 1px;
+      height: 18px;
+    }
   }
 
   .hero-reserve-btn {
@@ -620,7 +620,7 @@
       </div>
       <a href="#" class="hero-reserve-btn">Request a Reservation</a>
     </div>
-    <a class="scroll-cue" href="#meet-mexico" aria-label="Scroll to next section">
+    <a class="scroll-cue" href="#gallery" aria-label="Scroll to next section">
       <span>Scroll</span>
       <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
         <path d="M4 8L12 16L20 8" stroke="#F7F0DF" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
@@ -628,7 +628,7 @@
     </a>
   </section>
 
-  <section class="gallery">
+  <section class="gallery" id="gallery">
     <div class="gallery-frame">
       <div class="gallery-track" id="galleryTrack">
         <img class="gallery-slide is-active" src="assets/gallery/gallery-1.jpg" alt="Sydney and Drew, photo 1">
