@@ -766,6 +766,18 @@
         toggleMenu();
       });
 
+      var scrollCue = document.querySelector('.scroll-cue');
+      if (scrollCue) {
+        scrollCue.addEventListener('click', function (e) {
+          e.preventDefault();
+          var targetId = scrollCue.getAttribute('href').slice(1);
+          var target = document.getElementById(targetId);
+          if (target) {
+            target.scrollIntoView({ behavior: 'smooth' });
+          }
+        });
+      }
+
       document.addEventListener('click', function (e) {
         if (!menuPanel.contains(e.target) && !menuBtn.contains(e.target)) {
           closeMenu();
