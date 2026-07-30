@@ -20,7 +20,7 @@
     --walnut: #534125;
     --ocean-blue: #4E90A2;
     --powder-blue: #DEEAED;
-    --sky-tint: #CDD1CA;
+    --sky-tint: #D4E3E8;
     --font-display: 'Fraunces', serif;
     --font-body: 'Cormorant Garamond', serif;
     --font-script: 'Beau Rivage', cursive;
@@ -67,55 +67,45 @@
     background: var(--sky-tint);
   }
 
-  .payment-banner {
+  .site-banners {
     margin-top: 78px;
-    background: var(--sage);
+  }
+
+  .site-banner {
     color: #F6F1E4;
     padding: 16px 6vw;
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    gap: 14px;
+    justify-content: center;
+    text-align: center;
   }
 
-  @media (max-width: 480px) {
-    .payment-banner {
-      gap: 10px;
-    }
-
-    .payment-banner-btn {
-      padding: 10px 14px;
-      font-size: 13px;
-    }
+  .site-banner--payment {
+    background: var(--sage);
   }
 
-  .payment-banner-text {
+  .site-banner--rsvp {
+    background: var(--sky-blue);
+  }
+
+  .site-banner-text {
     font-family: var(--font-display);
     font-style: italic;
-    font-size: clamp(14px, 3.4vw, 16px);
-    letter-spacing: 0.05em;
+    font-size: clamp(14px, 3.8vw, 16px);
+    letter-spacing: 0.04em;
     text-transform: uppercase;
     font-weight: 500;
     white-space: nowrap;
   }
 
-  .payment-banner-btn {
-    font-family: var(--font-display);
-    font-style: italic;
-    font-size: 14px;
-    letter-spacing: 0.05em;
-    color: #F6F1E4;
-    border: 1px solid #F6F1E4;
-    padding: 10px 24px;
-    border-radius: 999px;
-    white-space: nowrap;
-    transition: background 0.2s ease, color 0.2s ease;
+  .banner-link {
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    transition: opacity 0.2s ease;
   }
 
-  .payment-banner-btn:hover {
-    background: #F6F1E4;
-    color: var(--sage);
+  .banner-link:hover {
+    opacity: 0.75;
   }
 
   .nav-mark {
@@ -154,7 +144,7 @@
   }
 
   .loader.is-fading {
-    background-color: rgba(205, 209, 202, 0);
+    background-color: rgba(212, 227, 232, 0);
     pointer-events: none;
   }
 
@@ -284,8 +274,9 @@
     inset: 0;
     background: linear-gradient(
       180deg,
-      rgba(83, 65, 37, 0.32) 0%,
-      rgba(83, 65, 37, 0.18) 35%,
+      rgba(83, 65, 37, 0.10) 0%,
+      rgba(83, 65, 37, 0.12) 30%,
+      rgba(83, 65, 37, 0.26) 46%,
       rgba(83, 65, 37, 0.34) 100%
     );
     z-index: 1;
@@ -652,9 +643,18 @@
     <a class="nav-mark" id="navMark" href="index.html" aria-label="Sydney &amp; Drew — Home"></a>
   </nav>
 
-  <div class="payment-banner" id="paymentBanner">
-    <div class="payment-banner-text" id="paymentBannerText">Submit final payment by January 1st, 2028</div>
-    <a href="#" class="payment-banner-btn">Make Payment</a>
+  <div class="site-banners">
+    <div class="site-banner site-banner--payment" id="paymentBanner">
+      <div class="site-banner-text" id="paymentBannerText">
+        <a href="#" class="banner-link">Submit final payment</a> by 1/1/2028
+      </div>
+    </div>
+
+    <div class="site-banner site-banner--rsvp" id="rsvpBanner">
+      <div class="site-banner-text" id="rsvpBannerText">
+        <a href="#" class="banner-link">RSVP</a> by 1/1/2028
+      </div>
+    </div>
   </div>
 
   <div class="menu-panel" id="menuPanel">
@@ -740,29 +740,43 @@
 
   <script>
     (function () {
-      // ---------- PAYMENT BANNER ----------
-      // For now: FORCE_SHOW makes the banner always visible so you can see/style it.
-      // When ready to go live with real date logic: set FORCE_SHOW = false, and
-      // fill in TRIGGER_DATE (when the banner should start appearing) and
-      // DUE_DATE (the actual payment deadline shown in the text).
-      var FORCE_SHOW = true;
-      var TRIGGER_DATE = new Date('2027-11-01'); // banner starts showing on this date
-      var DUE_DATE_TEXT = '1/1/2028';   // deadline text shown to guests
-
-      (function () {
-        var banner = document.getElementById('paymentBanner');
-        var bannerText = document.getElementById('paymentBannerText');
+      // ---------- SITE BANNERS ----------
+      // For now: FORCE_SHOW makes a banner always visible so you can see/style it.
+      // When ready to go live with real date logic: set FORCE_SHOW = false for that
+      // banner, and fill in TRIGGER_DATE (when it should start appearing) and
+      // DUE_DATE_TEXT (the deadline shown in the text).
+      function setupBanner(config) {
+        var banner = document.getElementById(config.bannerId);
+        var bannerText = document.getElementById(config.textId);
         if (!banner) return;
 
-        var shouldShow = FORCE_SHOW || (new Date() >= TRIGGER_DATE);
+        var shouldShow = config.forceShow || (new Date() >= config.triggerDate);
 
         if (shouldShow) {
-          bannerText.textContent = 'Submit final payment by ' + DUE_DATE_TEXT;
+          bannerText.innerHTML = '<a href="#" class="banner-link">' + config.linkLabel + '</a> by ' + config.dueDateText;
           banner.style.display = 'flex';
         } else {
           banner.style.display = 'none';
         }
-      })();
+      }
+
+      setupBanner({
+        bannerId: 'paymentBanner',
+        textId: 'paymentBannerText',
+        forceShow: true,
+        triggerDate: new Date('2027-11-01'),
+        dueDateText: '1/1/2028',
+        linkLabel: 'Submit final payment'
+      });
+
+      setupBanner({
+        bannerId: 'rsvpBanner',
+        textId: 'rsvpBannerText',
+        forceShow: true,
+        triggerDate: new Date('2027-11-01'),
+        dueDateText: '1/1/2028',
+        linkLabel: 'RSVP'
+      });
 
       var loader = document.getElementById('loader');
       var loaderMark = document.getElementById('loaderMark');
