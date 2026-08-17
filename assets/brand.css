@@ -1,0 +1,66 @@
+/* ==========================================================================
+   Sydney & Drew Wedding — Brand Stylesheet
+   Shared colors and typography for index.html and registry.html.
+   ========================================================================== */
+
+:root {
+  /* ---------- Color palette ---------- */
+  --sand: #F5F2EA;
+  --tulum: #AEA078;
+  --cacao: #49391F;
+  --caribbean: #6E92C4;
+  --shoreline: #D0E2F4;
+  --jungle: #848F5C;
+  --agave: #C7D0A9;
+
+  /* ---------- Typography ---------- */
+
+  /* Fraunces — secondary headings (set in italic + uppercase via .heading-secondary) */
+  --font-display: 'Fraunces', serif;
+
+  /* EB Garamond — body copy. Italic is the primary voice; regular is reserved
+     for spots that need extra clarity (form labels, fine print, nav, etc). */
+  --font-body: 'EB Garamond', serif;
+  --font-body-regular: 'EB Garamond', serif;
+
+  /* Sewell Wedding Script — replaces the old Parfumerie Script Pro image-mask
+     technique. Once the .ttf is loaded below, this becomes live, selectable
+     text instead of SVG masks. */
+  --font-script: 'Sewell Wedding', cursive;
+}
+
+/* ---------- @font-face: Sewell Wedding Script ---------- */
+
+@font-face {
+  font-family: 'Sewell Wedding';
+  src: url('SewellWedding-Regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* ---------- Reusable type treatments ---------- */
+
+/* Fraunces italic uppercase — secondary heading style */
+.heading-secondary {
+  font-family: var(--font-display);
+  font-style: italic;
+  text-transform: uppercase;
+}
+
+/* EB Garamond italic — primary body voice */
+.body-text {
+  font-family: var(--font-body);
+  font-style: italic;
+}
+
+/* EB Garamond regular — for clarity-critical text (labels, nav, fine print) */
+.body-text-clear {
+  font-family: var(--font-body-regular);
+  font-style: normal;
+}
+
+/* Sewell Wedding Script — live script text */
+.script-text {
+  font-family: var(--font-script);
+}

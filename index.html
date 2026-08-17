@@ -7,19 +7,9 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;1,9..144,300;1,9..144,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/brand.css">
 <style>
   :root {
-    --ivory: #F6F1E4;
-    --ivory-soft: #FBF8F1;
-    --ink-green: #26332A;
-    --sand: #D9CBAC;
-    --sage: #8C9A7C;
-    --greige: #BBA681;
-    --sky-blue: #A1B7DB;
-    --walnut: #534125;
-    --ocean-blue: #4A657E;
-    --powder-blue: #DEEAED;
-    --sky-tint: #87AAD8;
     --font-display: 'Fraunces', serif;
     --font-body: 'Fraunces', serif;
   }
@@ -29,8 +19,8 @@
   html { scroll-behavior: smooth; }
 
   body {
-    background: var(--ivory);
-    color: var(--ink-green);
+    background: var(--sand);
+    color: var(--cacao);
     font-family: var(--font-body);
     font-size: 18px;
     line-height: 1.6;
@@ -62,7 +52,7 @@
     align-items: center;
     height: 78px;
     padding: 0 6vw;
-    background: var(--sky-tint);
+    background: var(--shoreline);
   }
 
   .site-banners {
@@ -81,7 +71,7 @@
   }
 
   .site-banner {
-    color: #F6F1E4;
+    color: var(--sand);
     padding: 16px 6vw;
     display: flex;
     align-items: center;
@@ -90,11 +80,11 @@
   }
 
   .site-banner--payment {
-    background: var(--sage);
+    background: var(--jungle);
   }
 
   .site-banner--rsvp {
-    background: var(--sky-blue);
+    background: var(--caribbean);
   }
 
   .site-banner-text {
@@ -124,7 +114,7 @@
     transform: translate(-50%, -50%);
     width: 76px;
     height: 57px;
-    background-color: var(--walnut);
+    background-color: var(--cacao);
     -webkit-mask-image: url('assets/monogram.svg');
     mask-image: url('assets/monogram.svg');
     -webkit-mask-size: contain;
@@ -148,7 +138,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: var(--sky-tint);
+    background-color: var(--shoreline);
     transition: background-color 0.7s ease 0.35s;
   }
 
@@ -160,7 +150,7 @@
   .loader-mark {
     width: 260px;
     height: 195px;
-    background-color: var(--walnut);
+    background-color: var(--cacao);
     -webkit-mask-image: url('assets/monogram.svg');
     mask-image: url('assets/monogram.svg');
     -webkit-mask-size: contain;
@@ -200,7 +190,7 @@
     display: block;
     height: 1.5px;
     width: 100%;
-    background: var(--walnut);
+    background: var(--cacao);
     transition: transform 0.3s ease, opacity 0.3s ease;
     transform-origin: center;
   }
@@ -222,8 +212,8 @@
     top: 78px;
     left: 6vw;
     z-index: 99;
-    background: var(--ivory-soft);
-    border: 0.5px solid var(--sand);
+    background: var(--sand);
+    border: 0.5px solid var(--tulum);
     border-radius: 4px;
     min-width: 200px;
     padding: 10px 0;
@@ -246,11 +236,11 @@
     font-size: 14px;
     letter-spacing: 0.1em;
     text-transform: uppercase;
-    color: var(--ink-green);
+    color: var(--cacao);
   }
 
   .menu-panel a:hover {
-    background: var(--ivory);
+    background: var(--sand);
   }
 
   /* ---------- HERO ---------- */
@@ -262,8 +252,8 @@
     align-items: center;
     justify-content: center;
     text-align: center;
-    background: var(--sky-blue);
-    color: var(--ivory-soft);
+    background: var(--caribbean);
+    color: var(--sand);
     overflow: hidden;
     padding: 100px 6vw 60px;
   }
@@ -283,10 +273,10 @@
     inset: 0;
     background: linear-gradient(
       180deg,
-      rgba(83, 65, 37, 0.10) 0%,
-      rgba(83, 65, 37, 0.12) 30%,
-      rgba(83, 65, 37, 0.26) 46%,
-      rgba(83, 65, 37, 0.34) 100%
+      rgba(73, 57, 31, 0.10) 0%,
+      rgba(73, 57, 31, 0.12) 30%,
+      rgba(73, 57, 31, 0.26) 46%,
+      rgba(73, 57, 31, 0.34) 100%
     );
     z-index: 1;
   }
@@ -323,15 +313,15 @@
     font-size: 11px;
     letter-spacing: 0.22em;
     text-transform: uppercase;
-    color: #F6F1E4;
-    text-shadow: 0 1px 6px rgba(83, 65, 37, 0.5);
+    color: var(--sand);
+    text-shadow: 0 1px 6px rgba(73, 57, 31, 0.5);
   }
 
   .scroll-cue svg {
     width: 16px;
     height: 16px;
     animation: scrollBounce 1.8s ease-in-out infinite;
-    filter: drop-shadow(0 1px 4px rgba(83, 65, 37, 0.5));
+    filter: drop-shadow(0 1px 4px rgba(73, 57, 31, 0.5));
   }
 
   @keyframes scrollBounce {
@@ -365,18 +355,18 @@
     font-size: clamp(20px, 2.8vw, 30px);
     letter-spacing: 0.14em;
     text-transform: uppercase;
-    color: #F6F1E4;
+    color: var(--sand);
     z-index: 1;
     margin-top: 36px;
     margin-bottom: 2px;
-    text-shadow: 0 1px 8px rgba(83, 65, 37, 0.4);
+    text-shadow: 0 1px 8px rgba(73, 57, 31, 0.4);
   }
 
   .hero-names-oneline,
   .hero-names-stacked {
     position: relative;
-    background-color: #F6F1E4;
-    filter: drop-shadow(0 2px 16px rgba(83, 65, 37, 0.4));
+    background-color: var(--sand);
+    filter: drop-shadow(0 2px 16px rgba(73, 57, 31, 0.4));
   }
 
   .hero-names-oneline {
@@ -433,14 +423,14 @@
     font-weight: 400;
     font-size: clamp(15px, 1.9vw, 19px);
     letter-spacing: 0.06em;
-    color: #F6F1E4;
-    text-shadow: 0 1px 6px rgba(83, 65, 37, 0.45);
+    color: var(--sand);
+    text-shadow: 0 1px 6px rgba(73, 57, 31, 0.45);
   }
 
   .hero-divider-line {
     width: 1px;
     height: 18px;
-    background: #F6F1E4;
+    background: var(--sand);
     opacity: 0.55;
   }
 
@@ -454,11 +444,11 @@
     font-weight: 400;
     font-size: clamp(13px, 1.6vw, 16px);
     letter-spacing: 0.05em;
-    color: #534125;
-    background-color: #F6F1E4;
+    color: var(--cacao);
+    background-color: var(--sand);
     padding: 13px 34px;
     border-radius: 999px;
-    box-shadow: 0 4px 18px rgba(83, 65, 37, 0.35);
+    box-shadow: 0 4px 18px rgba(73, 57, 31, 0.35);
     transition: transform 0.2s ease, box-shadow 0.2s ease;
   }
 
@@ -471,12 +461,12 @@
 
   .hero-reserve-btn:hover {
     transform: translateY(-2px);
-    box-shadow: 0 6px 22px rgba(83, 65, 37, 0.4);
+    box-shadow: 0 6px 22px rgba(73, 57, 31, 0.4);
   }
 
   /* ---------- GALLERY ---------- */
   .gallery {
-    background: var(--ivory);
+    background: var(--sand);
     padding: 40px 6vw;
     scroll-margin-top: 78px;
   }
@@ -487,14 +477,14 @@
     margin: 0 auto;
     border-radius: 4px;
     overflow: hidden;
-    box-shadow: 0 18px 48px rgba(83, 65, 37, 0.22);
+    box-shadow: 0 18px 48px rgba(73, 57, 31, 0.22);
   }
 
   .gallery-track {
     position: relative;
     width: 100%;
     aspect-ratio: 3 / 2;
-    background: var(--greige);
+    background: var(--tulum);
   }
 
   .gallery-slide {
@@ -521,7 +511,7 @@
     width: 42px;
     height: 42px;
     border-radius: 50%;
-    background: rgba(83, 65, 37, 0.55);
+    background: rgba(73, 57, 31, 0.55);
     border: none;
     cursor: pointer;
     display: flex;
@@ -531,7 +521,7 @@
   }
 
   .gallery-arrow:hover {
-    background: rgba(83, 65, 37, 0.8);
+    background: rgba(73, 57, 31, 0.8);
   }
 
   .gallery-arrow svg {
@@ -544,7 +534,7 @@
 
   /* ---------- MEET US IN MEXICO ---------- */
   .meet-mexico {
-    background: var(--greige);
+    background: var(--tulum);
     padding: 100px 6vw;
     text-align: center;
   }
@@ -563,14 +553,14 @@
     font-size: clamp(20px, 3vw, 28px);
     letter-spacing: 0.14em;
     text-transform: uppercase;
-    color: #F6F1E4;
+    color: var(--sand);
     margin-bottom: 10px;
   }
 
   .meet-mexico-mark {
     width: min(50vw, 300px);
     aspect-ratio: 1175 / 411;
-    background-color: #F6F1E4;
+    background-color: var(--sand);
     -webkit-mask-image: url('assets/mexico-script.svg');
     mask-image: url('assets/mexico-script.svg');
     -webkit-mask-size: contain;
@@ -588,7 +578,7 @@
     font-weight: 400;
     font-size: 18px;
     line-height: 1.75;
-    color: #534125;
+    color: var(--cacao);
     text-align: left;
   }
 
@@ -611,7 +601,7 @@
     font-style: italic;
     font-size: 16px;
     text-align: center;
-    color: #6b5936;
+    color: var(--cacao);
   }
 
   /* ---------- FOOTER TEASER ---------- */
@@ -623,7 +613,7 @@
     font-size: clamp(13px, 3.6vw, 20px);
     letter-spacing: 0.06em;
     text-transform: uppercase;
-    color: #534125;
+    color: var(--cacao);
     white-space: nowrap;
   }
 
@@ -631,7 +621,7 @@
     width: min(50vw, 260px);
     aspect-ratio: 1463 / 387;
     margin: 8px auto 70px;
-    background-color: #534125;
+    background-color: var(--cacao);
     -webkit-mask-image: url('assets/names-oneline.svg');
     mask-image: url('assets/names-oneline.svg');
     -webkit-mask-size: contain;
@@ -678,7 +668,7 @@
   </div>
 
   <section class="hero">
-    <img class="hero-photo" src="assets/hero-watercolor.jpg" alt="Watercolor coastline of the Riviera Maya">
+    <img class="hero-photo" src="assets/cancun-painting.png" alt="Watercolor coastline of the Riviera Maya">
     <div class="hero-scrim"></div>
     <div class="hero-content">
       <div class="hero-wedding-of">the wedding of</div>
@@ -695,7 +685,7 @@
     <a class="scroll-cue" href="#gallery" aria-label="Scroll to next section">
       <span>Scroll</span>
       <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-        <path d="M4 8L12 16L20 8" stroke="#F6F1E4" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M4 8L12 16L20 8" stroke="var(--sand)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
       </svg>
     </a>
   </section>
@@ -716,10 +706,10 @@
         <img class="gallery-slide" src="assets/gallery/gallery-10.jpg" alt="Sydney and Drew, photo 11">
       </div>
       <button class="gallery-arrow prev" id="galleryPrev" aria-label="Previous photo">
-        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M15 5L8 12L15 19" stroke="#F6F1E4" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M15 5L8 12L15 19" stroke="var(--sand)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
       </button>
       <button class="gallery-arrow next" id="galleryNext" aria-label="Next photo">
-        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M9 5L16 12L9 19" stroke="#F6F1E4" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M9 5L16 12L9 19" stroke="var(--sand)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
       </button>
     </div>
   </section>
