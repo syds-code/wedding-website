@@ -112,8 +112,8 @@
     left: 50%;
     top: 50%;
     transform: translate(-50%, -50%);
-    width: 76px;
-    height: 57px;
+    width: 58px;
+    aspect-ratio: 1364.57 / 1320.92;
     background-color: var(--cacao);
     -webkit-mask-image: url('assets/monogram.svg');
     mask-image: url('assets/monogram.svg');
@@ -148,8 +148,8 @@
   }
 
   .loader-mark {
-    width: 260px;
-    height: 195px;
+    width: 220px;
+    aspect-ratio: 1364.57 / 1320.92;
     background-color: var(--cacao);
     -webkit-mask-image: url('assets/monogram.svg');
     mask-image: url('assets/monogram.svg');
@@ -362,47 +362,36 @@
     text-shadow: 0 1px 8px rgba(73, 57, 31, 0.4);
   }
 
-  .hero-names-oneline,
-  .hero-names-stacked {
+  .hero-names {
     position: relative;
-    background-color: var(--sand);
-    filter: drop-shadow(0 2px 16px rgba(73, 57, 31, 0.4));
+    z-index: 1;
+    display: flex;
+    flex-direction: row;
+    align-items: baseline;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 0 0.22em;
+    font-family: var(--font-script);
+    font-weight: 400;
+    color: var(--sand);
+    text-shadow: 0 2px 16px rgba(73, 57, 31, 0.4);
+    font-size: clamp(64px, 11vw, 150px);
+    line-height: 1;
+    max-width: 94vw;
+    margin: 0 auto;
   }
 
-  .hero-names-oneline {
-    -webkit-mask-image: url('assets/names-oneline.svg');
-    mask-image: url('assets/names-oneline.svg');
-    -webkit-mask-size: contain;
-    mask-size: contain;
-    -webkit-mask-repeat: no-repeat;
-    mask-repeat: no-repeat;
-    -webkit-mask-position: center;
-    mask-position: center;
-    width: min(92vw, 820px);
-    aspect-ratio: 1463 / 387;
-    display: block;
-  }
-
-  .hero-names-stacked {
-    -webkit-mask-image: url('assets/names-stacked.svg');
-    mask-image: url('assets/names-stacked.svg');
-    -webkit-mask-size: contain;
-    mask-size: contain;
-    -webkit-mask-repeat: no-repeat;
-    mask-repeat: no-repeat;
-    -webkit-mask-position: center;
-    mask-position: center;
-    width: min(74vw, 380px);
-    aspect-ratio: 932 / 864;
-    display: none;
+  .hero-names .amp {
+    font-size: 0.62em;
+    opacity: 0.92;
   }
 
   @media (max-width: 760px) {
-    .hero-names-oneline {
-      display: none;
-    }
-    .hero-names-stacked {
-      display: block;
+    .hero-names {
+      flex-direction: column;
+      align-items: center;
+      gap: 0.06em 0;
+      font-size: clamp(56px, 17vw, 96px);
     }
   }
 
@@ -618,18 +607,19 @@
   }
 
   .footer-names-mark {
-    width: min(50vw, 260px);
-    aspect-ratio: 1463 / 387;
+    font-family: var(--font-script);
+    font-weight: 400;
+    color: var(--cacao);
+    font-size: clamp(40px, 8vw, 68px);
+    line-height: 1;
+    text-align: center;
     margin: 8px auto 70px;
-    background-color: var(--cacao);
-    -webkit-mask-image: url('assets/names-oneline.svg');
-    mask-image: url('assets/names-oneline.svg');
-    -webkit-mask-size: contain;
-    mask-size: contain;
-    -webkit-mask-repeat: no-repeat;
-    mask-repeat: no-repeat;
-    -webkit-mask-position: center;
-    mask-position: center;
+  }
+
+  .footer-names-mark .amp {
+    font-size: 0.62em;
+    opacity: 0.92;
+    margin: 0 0.08em;
   }
 </style>
 </head>
@@ -672,9 +662,9 @@
     <div class="hero-scrim"></div>
     <div class="hero-content">
       <div class="hero-wedding-of">the wedding of</div>
-      <h1 class="sr-only">Sydney &amp; Drew</h1>
-      <div class="hero-names-oneline" aria-hidden="true"></div>
-      <div class="hero-names-stacked" aria-hidden="true"></div>
+      <h1 class="hero-names">
+        <span>Sydney</span><span class="amp">&amp;</span><span>Drew</span>
+      </h1>
       <div class="hero-details">
         <div class="hero-date">March 4th, 2028</div>
         <div class="hero-divider-line"></div>
@@ -739,7 +729,7 @@
   <p class="footer-note">
     We can't wait to celebrate with you!
   </p>
-  <div class="footer-names-mark" role="img" aria-label="Sydney & Drew"></div>
+  <p class="footer-names-mark">Sydney<span class="amp">&amp;</span>Drew</p>
 
   <script>
     (function () {
