@@ -4,7 +4,9 @@
 // Cloudflare Pages dashboard (Settings > Environment variables) — NOT in this file.
 
 const COOKIE_NAME = "sw_access";
-const COOKIE_MAX_AGE_SECONDS = 60 * 60 * 24 * 30; // 30 days
+// Session-only for now while testing — closing the browser clears it, so you'll
+// see the lock screen again next time. Swap back to a Max-Age (e.g. 60*60*24*30
+// for 30 days) once you're ready to stop re-testing constantly.
 
 export async function onRequest(context) {
   const { request, env, next } = context;
@@ -33,7 +35,7 @@ export async function onRequest(context) {
         status: 303,
         headers: {
           Location: "/",
-          "Set-Cookie": `${COOKIE_NAME}=${token}; Max-Age=${COOKIE_MAX_AGE_SECONDS}; Path=/; HttpOnly; Secure; SameSite=Lax`,
+          "Set-Cookie": `${COOKIE_NAME}=${token}; Path=/; HttpOnly; Secure; SameSite=Lax`,
         },
       });
       return response;
@@ -115,34 +117,34 @@ function renderLockPage({ error }) {
     font-weight: 500;
     text-transform: uppercase;
     letter-spacing: 0.1em;
-    font-size: 15px;
+    font-size: 20px;
     color: var(--cacao);
-    margin: 0 0 4px;
+    margin: 0 0 6px;
   }
 
   .script-line {
     font-family: 'Sewell Wedding', cursive;
-    font-size: 44px;
+    font-size: 60px;
     color: var(--cacao);
-    margin: 4px 0;
+    margin: 6px 0;
     line-height: 1.2;
   }
 
   .sub {
-    margin: 4px 0 36px;
+    margin: 6px 0 44px;
   }
 
   form {
     display: flex;
     flex-direction: column;
-    gap: 14px;
+    gap: 18px;
   }
 
   input[type="password"] {
     font-family: 'EB Garamond', Georgia, serif;
     font-style: italic;
-    font-size: 16px;
-    padding: 12px 16px;
+    font-size: 20px;
+    padding: 16px 18px;
     border: 1px solid var(--cacao);
     background: var(--sand);
     border-radius: 2px;
@@ -163,10 +165,10 @@ function renderLockPage({ error }) {
 
   button {
     font-family: 'EB Garamond', Georgia, serif;
-    font-size: 15px;
+    font-size: 19px;
     letter-spacing: 0.08em;
     text-transform: uppercase;
-    padding: 12px 20px;
+    padding: 16px 24px;
     background: var(--caribbean);
     color: var(--sand);
     border: none;
@@ -181,8 +183,8 @@ function renderLockPage({ error }) {
 
   .error {
     color: #a94442;
-    font-size: 14px;
-    margin: -6px 0 0;
+    font-size: 17px;
+    margin: -8px 0 0;
     letter-spacing: 0.02em;
     font-style: italic;
   }
