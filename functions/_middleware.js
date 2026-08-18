@@ -115,7 +115,7 @@ function renderLockPage({ error }) {
   }
 
   .gate {
-    max-width: 420px;
+    max-width: 600px;
     width: 100%;
     text-align: center;
   }
@@ -133,10 +133,18 @@ function renderLockPage({ error }) {
 
   .script-line {
     font-family: 'Sewell Wedding', cursive;
-    font-size: 110px;
+    font-size: clamp(40px, 9vw, 92px);
+    white-space: nowrap;
     color: var(--cacao);
     margin: 12px 0;
     line-height: 1.1;
+  }
+
+  form,
+  .blurb {
+    max-width: 420px;
+    margin-left: auto;
+    margin-right: auto;
   }
 
   .sub {
@@ -205,12 +213,6 @@ function renderLockPage({ error }) {
     margin: -8px 0 0;
     letter-spacing: 0.02em;
     font-style: italic;
-  }
-
-  @media (max-width: 480px) {
-    .script-line {
-      font-size: 64px;
-    }
   }
 </style>
 </head>
