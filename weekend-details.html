@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Sewell Wedding - Registry</title>
+<title>Sewell Wedding - Weekend Details</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;1,9..144,300;1,9..144,400&display=swap" rel="stylesheet">
@@ -19,8 +19,8 @@
   html { scroll-behavior: smooth; }
 
   body {
-    background: var(--caribbean);
-    color: var(--sand);
+    background: var(--sand);
+    color: var(--cacao);
     font-family: var(--font-body);
     font-size: 18px;
     line-height: 1.6;
@@ -41,7 +41,7 @@
     border: 0;
   }
 
-  /* ---------- NAV (shared) ---------- */
+  /* ---------- NAV ---------- */
   .nav {
     position: fixed;
     top: 0;
@@ -52,7 +52,7 @@
     align-items: center;
     height: 78px;
     padding: 0 6vw;
-    background: var(--sand);
+    background: var(--jungle);
   }
 
   .nav-mark {
@@ -60,9 +60,10 @@
     left: 50%;
     top: 50%;
     transform: translate(-50%, -50%);
+    z-index: 1;
     width: 58px;
     aspect-ratio: 1500 / 1386;
-    background-color: var(--cacao);
+    background-color: var(--sand);
     -webkit-mask-image: url('assets/monogram.svg');
     mask-image: url('assets/monogram.svg');
     -webkit-mask-size: contain;
@@ -78,7 +79,7 @@
     visibility: visible;
   }
 
-  /* ---------- LOADER (shared) ---------- */
+  /* ---------- LOADER ---------- */
   .loader {
     position: fixed;
     inset: 0;
@@ -86,19 +87,19 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: var(--sand);
+    background-color: var(--jungle);
     transition: background-color 0.7s ease 0.35s;
   }
 
   .loader.is-fading {
-    background-color: rgba(246, 241, 228, 0);
+    background-color: rgba(132, 143, 92, 0);
     pointer-events: none;
   }
 
   .loader-mark {
     width: 220px;
     aspect-ratio: 1500 / 1386;
-    background-color: var(--cacao);
+    background-color: var(--sand);
     -webkit-mask-image: url('assets/monogram.svg');
     mask-image: url('assets/monogram.svg');
     -webkit-mask-size: contain;
@@ -138,7 +139,7 @@
     display: block;
     height: 1.5px;
     width: 100%;
-    background: var(--cacao);
+    background: var(--sand);
     transition: transform 0.3s ease, opacity 0.3s ease;
     transform-origin: center;
   }
@@ -181,6 +182,8 @@
   .menu-panel a {
     display: block;
     padding: 12px 22px;
+    font-family: var(--font-display);
+    font-style: italic;
     font-size: 14px;
     letter-spacing: 0.1em;
     text-transform: uppercase;
@@ -192,120 +195,206 @@
   }
 
   /* ---------- PAGE INTRO ---------- */
-  .page-header {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+  .weekend-intro {
+    background: var(--jungle);
+    padding: 120px 6vw 60px;
     text-align: center;
-    padding: 140px 6vw 15px;
   }
 
-  .page-eyebrow {
-    font-size: 13px;
-    letter-spacing: 0.28em;
+  .weekend-title {
+    font-family: var(--font-script);
+    font-weight: 400;
+    color: var(--sand);
+    -webkit-text-stroke: 1.3px var(--sand);
+    text-stroke: 1.3px var(--sand);
+    font-size: clamp(56px, 9vw, 130px);
+    line-height: 1;
+  }
+
+  /* ---------- WEEKEND EVENTS TIMELINE ---------- */
+  .timeline-wrap {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: stretch;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 70px 6vw 90px;
+  }
+
+  @media (max-width: 800px) {
+    .timeline-wrap {
+      grid-template-columns: 1fr;
+      gap: 40px;
+      padding: 50px 6vw 60px;
+    }
+
+    .timeline-photo {
+      height: auto;
+      aspect-ratio: 3 / 4;
+    }
+  }
+
+  .timeline-photo {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 4px;
+  }
+
+  .timeline-list {
+    border-left: 1px solid var(--tulum);
+    padding-left: 30px;
+  }
+
+  .timeline-day {
+    margin-bottom: 40px;
+  }
+
+  .timeline-day:last-child {
+    margin-bottom: 0;
+  }
+
+  .timeline-day-heading {
+    font-family: var(--font-display);
+    font-style: italic;
+    font-weight: 400;
+    font-size: clamp(20px, 2.6vw, 26px);
+    letter-spacing: 0.08em;
     text-transform: uppercase;
-    color: var(--tulum);
+    color: var(--cacao);
+    margin-bottom: 16px;
+  }
+
+  .timeline-event {
     margin-bottom: 20px;
   }
 
-  .page-title {
-    font-family: var(--font-display);
-    font-weight: 400;
-    font-size: clamp(40px, 8vw, 72px);
+  .timeline-event:last-child {
+    margin-bottom: 0;
   }
 
-  .page-title-mark {
-    width: min(64vw, 400px);
-    aspect-ratio: 1075.68 / 539.19;
-    background-color: var(--sand);
-    -webkit-mask-image: url('assets/registry-script.svg');
-    mask-image: url('assets/registry-script.svg');
+  .timeline-event-title {
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: 19px;
+    color: var(--cacao);
+    margin-bottom: 4px;
+  }
+
+  .timeline-event-detail {
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: 14px;
+    color: var(--tulum);
+    line-height: 1.6;
+  }
+
+  /* ---------- DRESS CODE ---------- */
+  .dress-code {
+    background: var(--agave);
+    padding: 80px 6vw;
+  }
+
+  .dress-code-heading {
+    font-family: var(--font-display);
+    font-style: italic;
+    font-weight: 400;
+    font-size: clamp(26px, 3.6vw, 40px);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--cacao);
+    text-align: center;
+    margin-bottom: 30px;
+  }
+
+  .dress-code-intro {
+    max-width: 62ch;
+    margin: 0 auto 60px;
+    font-family: var(--font-body);
+    font-size: 17px;
+    line-height: 1.75;
+    color: var(--cacao);
+    text-align: center;
+  }
+
+  .dress-code-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 40px;
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+
+  .dress-code-card {
+    text-align: center;
+  }
+
+  .dress-code-moodboard {
+    width: 100%;
+    aspect-ratio: 4 / 5;
+    border: 1px dashed var(--cacao);
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--cacao);
+    font-style: italic;
+    font-size: 14px;
+    text-align: center;
+    padding: 20px;
+    margin-bottom: 18px;
+  }
+
+  .dress-code-event {
+    font-family: var(--font-display);
+    font-style: italic;
+    font-weight: 400;
+    font-size: 20px;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--cacao);
+    margin-bottom: 6px;
+  }
+
+  .dress-code-attire {
+    font-style: italic;
+    font-size: 15px;
+    color: var(--cacao);
+    opacity: 0.9;
+  }
+
+  /* ---------- FOOTER TEASER ---------- */
+  .site-footer {
+    background: var(--sand);
+    padding: 60px 6vw 70px;
+  }
+
+  .footer-note {
+    text-align: center;
+    padding: 0;
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: clamp(13px, 3.6vw, 20px);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--cacao);
+    white-space: nowrap;
+  }
+
+  .footer-names-mark {
+    width: min(15vw, 75px);
+    aspect-ratio: 950.46 / 949.72;
+    background-color: var(--cacao);
+    -webkit-mask-image: url('assets/footer-monogram.svg');
+    mask-image: url('assets/footer-monogram.svg');
     -webkit-mask-size: contain;
     mask-size: contain;
     -webkit-mask-repeat: no-repeat;
     mask-repeat: no-repeat;
     -webkit-mask-position: center;
     mask-position: center;
-  }
-
-  /* ---------- REGISTRY CONTENT ---------- */
-  .registry {
-    max-width: 640px;
-    margin: 0 auto;
-    padding: 35px 6vw 110px;
-    text-align: center;
-  }
-
-  .registry-intro {
-    font-size: 18px;
-    line-height: 1.65;
-    color: var(--sand);
-    max-width: 48ch;
-    margin: 0 auto 56px;
-  }
-
-  .registry-list {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 18px;
-  }
-
-  .registry-item {
-    display: inline-block;
-    font-family: var(--font-display);
-    font-style: italic;
-    font-weight: 400;
-    font-size: clamp(13px, 1.6vw, 16px);
-    letter-spacing: 0.05em;
-    color: var(--cacao);
-    background-color: var(--sand);
-    padding: 13px 34px;
-    border-radius: 999px;
-    box-shadow: 0 4px 18px rgba(73, 57, 31, 0.35);
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
-  }
-
-  .registry-item:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 22px rgba(73, 57, 31, 0.4);
-  }
-
-  .registry-footnote {
-    margin-top: 44px;
-    font-size: 14px;
-    font-style: italic;
-    color: var(--tulum);
-  }
-
-  /* ---------- FOOTER (shared) ---------- */
-  .footer-note {
-    text-align: center;
-    padding: 70px 6vw 0;
-    font-family: var(--font-display);
-    font-style: italic;
-    font-size: clamp(13px, 3.6vw, 20px);
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-    color: var(--sand);
-    white-space: nowrap;
-  }
-
-  .footer-names-mark {
-    font-family: var(--font-script);
-    font-weight: 400;
-    color: var(--sand);
-    font-size: clamp(40px, 8vw, 68px);
-    line-height: 1;
-    text-align: center;
-    margin: 8px auto 70px;
-  }
-
-  .footer-names-mark .amp {
-    font-size: 0.62em;
-    opacity: 0.92;
-    margin: 0 0.08em;
+    margin: 12px auto 0;
   }
 </style>
 </head>
@@ -329,28 +418,77 @@
     <a href="registry.html">Registry</a>
   </div>
 
-  <header class="page-header">
-    <div class="page-eyebrow">Sewell Wedding</div>
-    <h1 class="sr-only">Registry</h1>
-    <div class="page-title-mark" role="img" aria-label="Registry"></div>
+  <header class="weekend-intro">
+    <h1 class="weekend-title">Weekend Details</h1>
   </header>
 
-  <section class="registry">
-    <p class="registry-intro">Your presence at our destination wedding is truly gift enough. However, if you'd like to gift us something, we're registered at the following:</p>
+  <section class="timeline-wrap">
+    <img class="timeline-photo" src="assets/hotel_gallery/hotel-4.jpg" alt="[Weekend details photo placeholder]">
 
-    <div class="registry-list">
-      <a class="registry-item" href="#">Zola</a>
-      <a class="registry-item" href="#">Crate &amp; Barrel</a>
-      <a class="registry-item" href="#">Amazon</a>
+    <div class="timeline-list">
+      <div class="timeline-day">
+        <div class="timeline-day-heading">Friday, March 3</div>
+        <div class="timeline-event">
+          <div class="timeline-event-title">7 pm &mdash; Welcome Party</div>
+          <div class="timeline-event-detail">Tentative Location</div>
+          <div class="timeline-event-detail">Attire: white cocktail</div>
+        </div>
+      </div>
+
+      <div class="timeline-day">
+        <div class="timeline-day-heading">Saturday, March 4</div>
+        <div class="timeline-event">
+          <div class="timeline-event-title">3 pm &mdash; Ceremony</div>
+          <div class="timeline-event-detail">Tentative Location</div>
+          <div class="timeline-event-detail">Attire: beach formal</div>
+        </div>
+        <div class="timeline-event">
+          <div class="timeline-event-title">4 pm &mdash; Cocktails</div>
+          <div class="timeline-event-detail">Tentative Location</div>
+        </div>
+        <div class="timeline-event">
+          <div class="timeline-event-title">5 pm &mdash; Dinner and Dancing</div>
+          <div class="timeline-event-detail">Tentative Location</div>
+        </div>
+      </div>
+
+      <div class="timeline-day">
+        <div class="timeline-day-heading">Sunday, March 5</div>
+        <div class="timeline-event">
+          <div class="timeline-event-title">1 pm &mdash; Catamaran Cruise</div>
+          <div class="timeline-event-detail">Tentative Location</div>
+          <div class="timeline-event-detail">Attire: swimsuits + bring towels</div>
+        </div>
+      </div>
+
     </div>
-
-    <p class="registry-footnote">Links above will direct you to each registry.</p>
   </section>
 
-  <p class="footer-note">
-    We can't wait to celebrate with you!
-  </p>
-  <p class="footer-names-mark">Sydney<span class="amp">&amp;</span>Drew</p>
+  <section class="dress-code">
+    <div class="dress-code-heading">Dress Code</div>
+    <p class="dress-code-intro">We want everyone to feel their best all weekend long. Since our events will be outdoors, we'd encourage a block heel over a stiletto and lightweight, breathable fabrics. For the welcome party, feel free to wear white or light colors &mdash; and for the wedding day, we just ask that you leave white to the bride.</p>
+    <div class="dress-code-grid">
+      <div class="dress-code-card">
+        <div class="dress-code-moodboard">[Mood board goes here]</div>
+        <div class="dress-code-event">Welcome Party</div>
+        <div class="dress-code-attire">White Cocktail</div>
+      </div>
+      <div class="dress-code-card">
+        <div class="dress-code-moodboard">[Mood board goes here]</div>
+        <div class="dress-code-event">Wedding Day</div>
+        <div class="dress-code-attire">Beach Formal</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- More content goes here — building this out further once copy/photos are ready -->
+
+  <section class="site-footer">
+    <p class="footer-note">
+      We can't wait to celebrate with you!
+    </p>
+    <div class="footer-names-mark" role="img" aria-label="Sydney &amp; Drew monogram"></div>
+  </section>
 
   <script>
     (function () {

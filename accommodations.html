@@ -1,0 +1,1017 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sewell Wedding - Accommodations</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;1,9..144,300;1,9..144,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/brand.css">
+<style>
+  :root {
+    --font-display: 'Fraunces', serif;
+    --font-body: 'Fraunces', serif;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--sand);
+    color: var(--cacao);
+    font-family: var(--font-body);
+    font-size: 18px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  a { color: inherit; text-decoration: none; }
+
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
+
+  /* ---------- NAV ---------- */
+  .nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    height: 78px;
+    padding: 0 6vw;
+    background: var(--tulum);
+  }
+
+  .nav-mark {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1;
+    width: 58px;
+    aspect-ratio: 1500 / 1386;
+    background-color: var(--sand);
+    -webkit-mask-image: url('assets/monogram.svg');
+    mask-image: url('assets/monogram.svg');
+    -webkit-mask-size: contain;
+    mask-size: contain;
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    -webkit-mask-position: center;
+    mask-position: center;
+    visibility: hidden;
+  }
+
+  .nav-mark.is-visible {
+    visibility: visible;
+  }
+
+  /* ---------- LOADER ---------- */
+  .loader {
+    position: fixed;
+    inset: 0;
+    z-index: 500;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--tulum);
+    transition: background-color 0.7s ease 0.35s;
+  }
+
+  .loader.is-fading {
+    background-color: rgba(174, 160, 120, 0);
+    pointer-events: none;
+  }
+
+  .loader-mark {
+    width: 220px;
+    aspect-ratio: 1500 / 1386;
+    background-color: var(--sand);
+    -webkit-mask-image: url('assets/monogram.svg');
+    mask-image: url('assets/monogram.svg');
+    -webkit-mask-size: contain;
+    mask-size: contain;
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    -webkit-mask-position: center;
+    mask-position: center;
+    will-change: transform;
+    transition: transform 0.85s cubic-bezier(0.65, 0, 0.35, 1);
+  }
+
+  .loader.is-done {
+    display: none;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .loader { transition: none; }
+    .loader-mark { transition: none; }
+  }
+
+  .menu-btn {
+    position: relative;
+    z-index: 1;
+    width: 26px;
+    height: 16px;
+    background: transparent;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  .menu-btn span {
+    display: block;
+    height: 1.5px;
+    width: 100%;
+    background: var(--sand);
+    transition: transform 0.3s ease, opacity 0.3s ease;
+    transform-origin: center;
+  }
+
+  .menu-btn.is-open span:nth-child(1) {
+    transform: translateY(7px) rotate(45deg);
+  }
+
+  .menu-btn.is-open span:nth-child(2) {
+    opacity: 0;
+  }
+
+  .menu-btn.is-open span:nth-child(3) {
+    transform: translateY(-7px) rotate(-45deg);
+  }
+
+  .menu-panel {
+    position: fixed;
+    top: 78px;
+    left: 6vw;
+    z-index: 99;
+    background: var(--sand);
+    border: 0.5px solid var(--tulum);
+    border-radius: 4px;
+    min-width: 200px;
+    padding: 10px 0;
+    box-shadow: 0 12px 32px rgba(38, 51, 42, 0.14);
+    opacity: 0;
+    transform: translateY(-6px);
+    pointer-events: none;
+    transition: opacity 0.2s ease, transform 0.2s ease;
+  }
+
+  .menu-panel.is-open {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+  }
+
+  .menu-panel a {
+    display: block;
+    padding: 12px 22px;
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: 14px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--cacao);
+  }
+
+  .menu-panel a:hover {
+    background: var(--sand);
+  }
+
+  /* ---------- PAGE INTRO ---------- */
+  .stay-intro {
+    background: var(--tulum);
+    padding: 120px 6vw 50px;
+    text-align: center;
+  }
+
+  .stay-hotel-script {
+    font-family: var(--font-script);
+    font-weight: 400;
+    color: var(--sand);
+    -webkit-text-stroke: 1.3px var(--sand);
+    text-stroke: 1.3px var(--sand);
+    font-size: clamp(56px, 9vw, 130px);
+    line-height: 1;
+  }
+
+  .stay-hotel-subname {
+    font-family: var(--font-display);
+    font-style: italic;
+    font-weight: 400;
+    font-size: clamp(18px, 2.6vw, 26px);
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--sand);
+    margin-top: -14px;
+  }
+
+  .stay-hotel-tagline {
+    font-family: var(--font-display);
+    font-style: italic;
+    font-weight: 400;
+    font-size: clamp(13px, 1.8vw, 17px);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--sand);
+    opacity: 0.85;
+    margin-top: 10px;
+  }
+
+  /* ---------- ROOM/RESORT GALLERY ---------- */
+  .stay-gallery {
+    background: var(--sand);
+    padding: 40px 6vw 20px;
+    scroll-margin-top: 78px;
+  }
+
+  .stay-gallery-frame {
+    position: relative;
+    max-width: 900px;
+    margin: 0 auto;
+    border-radius: 4px;
+    overflow: hidden;
+    box-shadow: 0 18px 48px rgba(73, 57, 31, 0.22);
+  }
+
+  .stay-gallery-track {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 3 / 2;
+    background: var(--tulum);
+  }
+
+  .stay-gallery-slide {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+    pointer-events: none;
+  }
+
+  .stay-gallery-slide.is-active {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  .stay-gallery-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 2;
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    background: rgba(73, 57, 31, 0.55);
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.2s ease;
+  }
+
+  .stay-gallery-arrow:hover {
+    background: rgba(73, 57, 31, 0.8);
+  }
+
+  .stay-gallery-arrow svg {
+    width: 18px;
+    height: 18px;
+  }
+
+  .stay-gallery-arrow.prev { left: 14px; }
+  .stay-gallery-arrow.next { right: 14px; }
+
+  /* ---------- RESORT INFORMATION ---------- */
+  .resort-info {
+    padding: 30px 6vw 60px;
+  }
+
+  .resort-info-grid {
+    display: block;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  .resort-info-eyebrow {
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: 16px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--tulum);
+    text-align: center;
+    margin-bottom: 20px;
+  }
+
+
+  .resort-info-intro {
+    font-style: italic;
+    color: var(--tulum);
+    line-height: 1.7;
+    margin-bottom: 40px;
+  }
+
+  .resort-info-list {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .resort-info-item {
+    display: flex;
+    gap: 18px;
+    padding: 26px 0;
+    border-bottom: 1px solid var(--tulum);
+  }
+
+  .resort-info-item:first-child {
+    border-top: 1px solid var(--tulum);
+  }
+
+  .resort-info-icon {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    border: 1px solid var(--tulum);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    color: var(--tulum);
+  }
+
+  .resort-info-icon svg {
+    width: 16px;
+    height: 16px;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.5;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+  .resort-info-label {
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: 13px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--cacao);
+    margin-bottom: 6px;
+  }
+
+  .resort-info-text {
+    font-size: 15px;
+    color: var(--cacao);
+    line-height: 1.6;
+  }
+
+  .resort-info-text a {
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    transition: opacity 0.2s ease;
+  }
+
+  .resort-info-text a:hover {
+    opacity: 0.7;
+  }
+
+  /* ---------- AMENITIES ---------- */
+  .amenities {
+    padding: 50px 6vw 30px;
+    max-width: 980px;
+    margin: 0 auto;
+  }
+
+  .amenities-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 40px 48px;
+  }
+
+  .amenity {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 12px;
+    width: 150px;
+  }
+
+  .amenity-icon {
+    width: 44px;
+    height: 44px;
+    color: var(--tulum);
+  }
+
+  .amenity-icon svg {
+    width: 100%;
+    height: 100%;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.4;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+  .amenity-figure {
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: clamp(20px, 3vw, 26px);
+    color: var(--cacao);
+  }
+
+  .amenity-label {
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: 13px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--cacao);
+    opacity: 0.85;
+  }
+
+  /* ---------- ROOM CATEGORIES INTRO ---------- */
+  .room-block-intro {
+    background: var(--tulum);
+    padding: 60px 6vw 50px;
+    text-align: center;
+  }
+
+  .room-block-heading {
+    font-family: var(--font-display);
+    font-style: italic;
+    font-weight: 400;
+    font-size: clamp(26px, 3.6vw, 40px);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--sand);
+    margin-bottom: 28px;
+  }
+
+  .room-block-intro-text {
+    max-width: 62ch;
+    margin: 0 auto;
+    font-family: var(--font-body);
+    font-size: 18px;
+    line-height: 1.75;
+    color: var(--cacao);
+    text-align: left;
+  }
+
+  .room-block-intro-text p {
+    margin: 0 0 20px;
+  }
+
+  .room-block-intro-text p:last-child {
+    margin-bottom: 0;
+  }
+
+  .hero-reserve-btn {
+    position: relative;
+    z-index: 1;
+    margin-top: 30px;
+    display: inline-block;
+    font-family: var(--font-display);
+    font-style: italic;
+    font-weight: 400;
+    font-size: clamp(13px, 1.6vw, 16px);
+    letter-spacing: 0.05em;
+    color: var(--cacao);
+    background-color: var(--sand);
+    padding: 13px 34px;
+    border-radius: 999px;
+    box-shadow: 0 4px 18px rgba(73, 57, 31, 0.35);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  .hero-reserve-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 22px rgba(73, 57, 31, 0.4);
+  }
+
+  .room-block-fine-print {
+    font-style: italic;
+    font-size: 16px;
+    text-align: center;
+    color: var(--cacao);
+    margin-top: 24px;
+  }
+
+  /* ---------- ROOM ENTRY (reusable, alternating) ---------- */
+  .room-entry {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    gap: 50px;
+    padding: 50px 6vw;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  @media (max-width: 800px) {
+    .room-entry {
+      grid-template-columns: 1fr;
+      gap: 30px;
+      padding: 50px 6vw;
+    }
+  }
+
+  .room-entry--reverse {
+    display: block;
+    background: var(--tulum);
+    max-width: none;
+    padding: 0;
+  }
+
+  .room-entry--reverse > .room-entry-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 50px 6vw;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    gap: 50px;
+    width: 100%;
+  }
+
+  .room-entry--reverse .room-entry-photo {
+    order: -1;
+  }
+
+  @media (max-width: 800px) {
+    .room-entry--reverse > .room-entry-inner {
+      grid-template-columns: 1fr;
+      gap: 30px;
+    }
+    .room-entry--reverse .room-entry-photo {
+      order: 0;
+    }
+  }
+
+  .room-entry-photo {
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+    border-radius: 4px;
+  }
+
+  .room-entry-name {
+    font-family: var(--font-display);
+    font-weight: 400;
+    font-size: clamp(24px, 2.8vw, 32px);
+    margin-bottom: 18px;
+  }
+
+  .room-entry--reverse .room-entry-name,
+  .room-entry--reverse .room-entry-list,
+  .room-entry--reverse .room-entry-detail {
+    color: var(--sand);
+  }
+
+  .room-entry-list {
+    list-style: disc;
+    padding-left: 20px;
+    margin-bottom: 20px;
+    font-size: 15px;
+    line-height: 1.8;
+  }
+
+  .room-entry-detail {
+    font-size: 15px;
+    line-height: 1.8;
+    margin-bottom: 6px;
+  }
+
+  .room-entry-detail strong {
+    font-weight: 600;
+  }
+
+  /* ---------- FOOTER TEASER ---------- */
+  .site-footer {
+    background: var(--tulum);
+    padding: 60px 6vw 70px;
+  }
+
+  .footer-note {
+    text-align: center;
+    padding: 0;
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: clamp(13px, 3.6vw, 20px);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--sand);
+    white-space: nowrap;
+  }
+
+  .footer-names-mark {
+    width: min(15vw, 75px);
+    aspect-ratio: 950.46 / 949.72;
+    background-color: var(--sand);
+    -webkit-mask-image: url('assets/footer-monogram.svg');
+    mask-image: url('assets/footer-monogram.svg');
+    -webkit-mask-size: contain;
+    mask-size: contain;
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    -webkit-mask-position: center;
+    mask-position: center;
+    margin: 12px auto 0;
+  }
+</style>
+</head>
+<body>
+
+  <div class="loader" id="loader">
+    <div class="loader-mark" id="loaderMark"></div>
+  </div>
+
+  <nav class="nav">
+    <button class="menu-btn" id="menuBtn" aria-label="Open menu" aria-expanded="false" aria-controls="menuPanel">
+      <span></span><span></span><span></span>
+    </button>
+    <a class="nav-mark" id="navMark" href="index.html" aria-label="Sydney &amp; Drew — Home"></a>
+  </nav>
+
+  <div class="menu-panel" id="menuPanel">
+    <a href="accommodations.html">Accommodations</a>
+    <a href="weekend-details.html">Weekend Details</a>
+    <a href="#">RSVP</a>
+    <a href="registry.html">Registry</a>
+  </div>
+
+  <header class="stay-intro">
+    <h1 class="stay-hotel-script">The Five&lt;</h1>
+    <div class="stay-hotel-subname">Beach Hotel and Residences</div>
+  </header>
+
+  <section class="stay-gallery" id="stay-gallery">
+    <div class="stay-gallery-frame">
+      <div class="stay-gallery-track" id="stayGalleryTrack">
+        <img class="stay-gallery-slide is-active" src="assets/hotel_gallery/hotel-1.jpg" alt="The Fives Beach Hotel, pool view from suite terrace">
+        <img class="stay-gallery-slide" src="assets/hotel_gallery/hotel-2.jpg" alt="The Fives Beach Hotel, tennis court">
+        <img class="stay-gallery-slide" src="assets/hotel_gallery/hotel-3.jpg" alt="The Fives Beach Hotel, restaurant interior">
+        <img class="stay-gallery-slide" src="assets/hotel_gallery/hotel-4.jpg" alt="The Fives Beach Hotel, infinity pool">
+        <img class="stay-gallery-slide" src="assets/hotel_gallery/hotel-5.jpg" alt="The Fives Beach Hotel, pool at sunset">
+        <img class="stay-gallery-slide" src="assets/hotel_gallery/hotel-6.jpg" alt="The Fives Beach Hotel, pool and suites">
+        <img class="stay-gallery-slide" src="assets/hotel_gallery/hotel-7.jpg" alt="The Fives Beach Hotel, beachfront art installation at sunset">
+        <img class="stay-gallery-slide" src="assets/hotel_gallery/hotel-8.jpg" alt="The Fives Beach Hotel, aerial view of pools and beach">
+        <img class="stay-gallery-slide" src="assets/hotel_gallery/hotel-9.jpg" alt="The Fives Beach Hotel, resort grounds">
+      </div>
+      <button class="stay-gallery-arrow prev" id="stayGalleryPrev" aria-label="Previous photo">
+        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M15 5L8 12L15 19" stroke="var(--sand)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+      <button class="stay-gallery-arrow next" id="stayGalleryNext" aria-label="Next photo">
+        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M9 5L16 12L9 19" stroke="var(--sand)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+    </div>
+  </section>
+
+  <section class="amenities">
+    <div class="amenities-grid">
+      <div class="amenity">
+        <div class="amenity-icon">
+          <svg viewBox="0 0 24 24"><path d="M6 2v6M9 2v6M12 2v6"/><path d="M6 8c0 2 1.5 3 3 3s3-1 3-3"/><path d="M9 11v11"/><path d="M19 2c-2.5 2-3.5 5-3 8.5.2 1.3 1 2 2 2"/><path d="M18 12.5V22"/></svg>
+        </div>
+        <div class="amenity-figure">14</div>
+        <div class="amenity-label">Restaurants</div>
+      </div>
+
+      <div class="amenity">
+        <div class="amenity-icon">
+          <svg viewBox="0 0 24 24"><path d="M5 4h14a1 1 0 0 1 .8 1.6l-6.3 7.9v5.5"/><path d="M11.5 19h5"/><path d="M18.5 5.6l-6.3 7.9-6.3-7.9"/></svg>
+        </div>
+        <div class="amenity-figure">8</div>
+        <div class="amenity-label">Bars &amp; Lounges</div>
+      </div>
+
+      <div class="amenity">
+        <div class="amenity-icon">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="6" r="2.6"/><path d="M3 15c1.5-2 3-2 4.5 0s3 2 4.5 0 3-2 4.5 0 3 2 4.5 0"/><path d="M3 19.5c1.5-2 3-2 4.5 0s3 2 4.5 0 3-2 4.5 0 3 2 4.5 0"/></svg>
+        </div>
+        <div class="amenity-figure">8</div>
+        <div class="amenity-label">Outdoor Pools</div>
+      </div>
+
+      <div class="amenity">
+        <div class="amenity-icon">
+          <svg viewBox="0 0 24 24"><path d="M12 3c5 0 9 4 9 8H3c0-4 4-8 9-8z"/><path d="M12 3v16"/><path d="M12 19c0 1.2-1 2-2 2"/></svg>
+        </div>
+        <div class="amenity-figure">3</div>
+        <div class="amenity-label">Poolside Bars</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="resort-info">
+    <div class="resort-info-grid">
+      <div>
+        <div class="resort-info-eyebrow">Resort Information</div>
+
+        <p class="resort-info-intro">The Fives Beach Resort &amp; Residences All Inclusive is just south of Cancún on the shores of the Riviera Maya. The Fives blends laid-back beach living with elevated design &mdash; spacious suites with full kitchens and private terraces, a string of pools leading down to the sand, and enough restaurants and bars that no two nights have to look the same.</p>
+
+        <div class="resort-info-list">
+          <div class="resort-info-item">
+            <div class="resort-info-icon">
+              <svg viewBox="0 0 24 24"><path d="M4 12l5 5L20 6"/></svg>
+            </div>
+            <div>
+              <div class="resort-info-label">Check-In and Out Policy</div>
+              <div class="resort-info-text">Check-in begins at 3:00 PM; check-out is by 12:00 PM.</div>
+            </div>
+          </div>
+
+          <div class="resort-info-item">
+            <div class="resort-info-icon">
+              <svg viewBox="0 0 24 24"><path d="M12 21s7-7.5 7-12a7 7 0 1 0-14 0c0 4.5 7 12 7 12z"/><circle cx="12" cy="9" r="2.3"/></svg>
+            </div>
+            <div>
+              <div class="resort-info-label">Location</div>
+              <div class="resort-info-text">Playa del Carmen, Mexico</div>
+            </div>
+          </div>
+
+          <div class="resort-info-item">
+            <div class="resort-info-icon">
+              <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M3 12h18"/><path d="M12 3c2.5 2.5 3.8 6 3.8 9s-1.3 6.5-3.8 9c-2.5-2.5-3.8-6-3.8-9s1.3-6.5 3.8-9z"/></svg>
+            </div>
+            <div>
+              <div class="resort-info-label">Arriving Airport</div>
+              <div class="resort-info-text">(CUN) Cancún, Mexico</div>
+            </div>
+          </div>
+
+          <div class="resort-info-item">
+            <div class="resort-info-icon">
+              <svg viewBox="0 0 24 24"><path d="M4 11l8-7 8 7"/><path d="M6 10v10h12V10"/></svg>
+            </div>
+            <div>
+              <div class="resort-info-label">Address</div>
+              <div class="resort-info-text">Acceso Xcalacoco s/n, Fracc. El Limonar 1, Playa del Carmen, Q.R., 77710, Mexico</div>
+            </div>
+          </div>
+
+          <div class="resort-info-item">
+            <div class="resort-info-icon">
+              <svg viewBox="0 0 24 24"><path d="M6 3h3l2 5-2.5 2a12 12 0 0 0 5.5 5.5l2-2.5 5 2v3a2 2 0 0 1-2.2 2A16 16 0 0 1 4 5.2 2 2 0 0 1 6 3z"/></svg>
+            </div>
+            <div>
+              <div class="resort-info-label">Phone</div>
+              <div class="resort-info-text">+52 984 980 0541</div>
+            </div>
+          </div>
+
+          <div class="resort-info-item">
+            <div class="resort-info-icon">
+              <svg viewBox="0 0 24 24"><path d="M9 15l6-6"/><path d="M13 6l1.5-1.5a3 3 0 1 1 4 4L17 10"/><path d="M11 18l-1.5 1.5a3 3 0 1 1-4-4L7 14"/></svg>
+            </div>
+            <div>
+              <div class="resort-info-label">Website</div>
+              <div class="resort-info-text"><a href="https://www.thefiveshotels.com/the-fives-beach-hotel--residences.html" target="_blank" rel="noopener">thefiveshotels.com</a></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="room-block-intro">
+    <div class="room-block-heading">Room Categories Held for the Group</div>
+    <div class="room-block-intro-text">
+      <p>We've held a block of rooms across a few different categories, so there's an option to fit every budget and group size. Most rooms are held for Thursday through Sunday, but you can request different dates if you'd like to arrive earlier, stay later, or need a different length of stay altogether. If you have a different room category in mind that isn't listed here, reach out to Vibe Thrive Travel and they can add it to our group.</p>
+    </div>
+    <a href="#" class="hero-reserve-btn">Request a Reservation</a>
+    <p class="room-block-fine-print">Please reach out to Vibe Thrive Travel with any travel questions: info1@vibethrivetravel.com</p>
+  </section>
+
+  <!-- EXAMPLE ROOM ENTRY — placeholder template, ready to duplicate once real room categories/photos are set -->
+  <section class="room-entry">
+    <img class="room-entry-photo" src="assets/hotel_gallery/hotel-1.jpg" alt="[Room category placeholder photo]">
+    <div>
+      <h3 class="room-entry-name">[Room Category Name]</h3>
+      <ul class="room-entry-list">
+        <li>[View or feature]</li>
+        <li>[Feature]</li>
+        <li>[Feature]</li>
+      </ul>
+      <div class="room-entry-detail"><strong>Bedding options:</strong> [e.g. 1 King Bed or 2 Double Beds]</div>
+      <div class="room-entry-detail"><strong>Room with King Bed:</strong> Maximum [X] Guests</div>
+      <div class="room-entry-detail"><strong>Room with Double Beds:</strong> Maximum [X] Guests</div>
+    </div>
+  </section>
+
+  <!-- SECOND EXAMPLE — reverse variant (tulum background, photo on the left) -->
+  <section class="room-entry room-entry--reverse">
+    <div class="room-entry-inner">
+      <img class="room-entry-photo" src="assets/hotel_gallery/hotel-6.jpg" alt="[Room category placeholder photo]">
+      <div>
+        <h3 class="room-entry-name">[Room Category Name]</h3>
+        <ul class="room-entry-list">
+          <li>[View or feature]</li>
+          <li>[Feature]</li>
+          <li>[Feature]</li>
+        </ul>
+        <div class="room-entry-detail"><strong>Bedding options:</strong> [e.g. 1 King Bed or 2 Double Beds]</div>
+        <div class="room-entry-detail"><strong>Room with King Bed:</strong> Maximum [X] Guests</div>
+        <div class="room-entry-detail"><strong>Room with Double Beds:</strong> Maximum [X] Guests</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- THIRD EXAMPLE — back to the light variant, alternating rhythm continues -->
+  <section class="room-entry">
+    <img class="room-entry-photo" src="assets/hotel_gallery/hotel-9.jpg" alt="[Room category placeholder photo]">
+    <div>
+      <h3 class="room-entry-name">[Room Category Name]</h3>
+      <ul class="room-entry-list">
+        <li>[View or feature]</li>
+        <li>[Feature]</li>
+        <li>[Feature]</li>
+      </ul>
+      <div class="room-entry-detail"><strong>Bedding options:</strong> [e.g. 1 King Bed or 2 Double Beds]</div>
+      <div class="room-entry-detail"><strong>Room with King Bed:</strong> Maximum [X] Guests</div>
+      <div class="room-entry-detail"><strong>Room with Double Beds:</strong> Maximum [X] Guests</div>
+    </div>
+  </section>
+
+  <section class="site-footer">
+    <p class="footer-note">
+      We can't wait to celebrate with you!
+    </p>
+    <div class="footer-names-mark" role="img" aria-label="Sydney &amp; Drew monogram"></div>
+  </section>
+
+  <script>
+    (function () {
+      var loader = document.getElementById('loader');
+      var loaderMark = document.getElementById('loaderMark');
+      var navMark = document.getElementById('navMark');
+      var HOLD_MS = 700;
+      var MOVE_MS = 850;
+
+      function runHandoff() {
+        var startRect = loaderMark.getBoundingClientRect();
+
+        navMark.style.transition = 'none';
+        navMark.classList.add('is-visible');
+        navMark.style.opacity = '0';
+        var endRect = navMark.getBoundingClientRect();
+        navMark.style.opacity = '';
+
+        var endFontSize = endRect.width;
+        var startFontSize = startRect.width;
+        var scale = endFontSize / startFontSize;
+
+        var startCenterX = startRect.left + startRect.width / 2;
+        var startCenterY = startRect.top + startRect.height / 2;
+        var endCenterX = endRect.left + endRect.width / 2;
+        var endCenterY = endRect.top + endRect.height / 2;
+
+        var deltaX = endCenterX - startCenterX;
+        var deltaY = endCenterY - startCenterY;
+
+        navMark.classList.remove('is-visible');
+
+        requestAnimationFrame(function () {
+          loaderMark.style.transform =
+            'translate(' + deltaX + 'px, ' + deltaY + 'px) scale(' + scale + ')';
+          loader.classList.add('is-fading');
+        });
+
+        setTimeout(function () {
+          navMark.classList.add('is-visible');
+          loader.classList.add('is-done');
+        }, MOVE_MS);
+      }
+
+      window.addEventListener('load', function () {
+        setTimeout(runHandoff, HOLD_MS);
+      });
+
+      var menuBtn = document.getElementById('menuBtn');
+      var menuPanel = document.getElementById('menuPanel');
+
+      function closeMenu() {
+        menuBtn.classList.remove('is-open');
+        menuPanel.classList.remove('is-open');
+        menuBtn.setAttribute('aria-expanded', 'false');
+      }
+
+      function toggleMenu() {
+        var willOpen = !menuPanel.classList.contains('is-open');
+        menuBtn.classList.toggle('is-open', willOpen);
+        menuPanel.classList.toggle('is-open', willOpen);
+        menuBtn.setAttribute('aria-expanded', String(willOpen));
+      }
+
+      menuBtn.addEventListener('click', function (e) {
+        e.stopPropagation();
+        toggleMenu();
+      });
+
+      document.addEventListener('click', function (e) {
+        if (!menuPanel.contains(e.target) && !menuBtn.contains(e.target)) {
+          closeMenu();
+        }
+      });
+
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape') closeMenu();
+      });
+
+      var slides = document.querySelectorAll('.stay-gallery-slide');
+      var prevBtn = document.getElementById('stayGalleryPrev');
+      var nextBtn = document.getElementById('stayGalleryNext');
+      var track = document.getElementById('stayGalleryTrack');
+      var galleryFrame = document.querySelector('.stay-gallery-frame');
+      var current = 0;
+      var AUTOPLAY_MS = 5000;
+      var autoplayTimer = null;
+
+      function showSlide(index) {
+        slides[current].classList.remove('is-active');
+        current = (index + slides.length) % slides.length;
+        slides[current].classList.add('is-active');
+      }
+
+      function startAutoplay() {
+        stopAutoplay();
+        autoplayTimer = setInterval(function () {
+          showSlide(current + 1);
+        }, AUTOPLAY_MS);
+      }
+
+      function stopAutoplay() {
+        if (autoplayTimer) {
+          clearInterval(autoplayTimer);
+          autoplayTimer = null;
+        }
+      }
+
+      function goToSlide(index) {
+        showSlide(index);
+        startAutoplay();
+      }
+
+      if (prevBtn && nextBtn) {
+        prevBtn.addEventListener('click', function () { goToSlide(current - 1); });
+        nextBtn.addEventListener('click', function () { goToSlide(current + 1); });
+      }
+
+      if (track) {
+        var touchStartX = 0;
+        var touchEndX = 0;
+        var SWIPE_THRESHOLD = 40;
+
+        track.addEventListener('touchstart', function (e) {
+          touchStartX = e.changedTouches[0].screenX;
+        }, { passive: true });
+
+        track.addEventListener('touchend', function (e) {
+          touchEndX = e.changedTouches[0].screenX;
+          var delta = touchEndX - touchStartX;
+          if (Math.abs(delta) > SWIPE_THRESHOLD) {
+            if (delta < 0) {
+              goToSlide(current + 1);
+            } else {
+              goToSlide(current - 1);
+            }
+          }
+        }, { passive: true });
+      }
+
+      if (slides.length > 1) {
+        startAutoplay();
+
+        if (galleryFrame) {
+          galleryFrame.addEventListener('mouseenter', stopAutoplay);
+          galleryFrame.addEventListener('mouseleave', startAutoplay);
+        }
+      }
+    })();
+  </script>
+
+</body>
+</html>
