@@ -135,6 +135,7 @@ function renderLockPage({ error }) {
     font-family: 'Sewell Wedding', cursive;
     font-size: clamp(40px, 9vw, 92px);
     white-space: nowrap;
+    word-spacing: 0.15em;
     color: var(--cacao);
     margin: 12px 0;
     line-height: 1.1;
@@ -219,7 +220,7 @@ function renderLockPage({ error }) {
 <body>
   <div class="gate">
     <p class="kicker">Welcome to the</p>
-    <p class="script-line">Sewell Wedding</p>
+    <p class="script-line">Sewell&nbsp;&nbsp;Wedding</p>
     <p class="kicker sub">Website</p>
     <p class="blurb">This site is still under construction. Check back soon or enter the password to peek early.</p>
     <form method="POST" action="/__gate">
