@@ -133,14 +133,23 @@ function renderLockPage({ error }) {
 
   .script-line {
     font-family: 'Sewell Wedding', cursive;
-    font-size: 60px;
+    font-size: 110px;
     color: var(--cacao);
-    margin: 6px 0;
-    line-height: 1.2;
+    margin: 12px 0;
+    line-height: 1.1;
   }
 
   .sub {
-    margin: 6px 0 44px;
+    margin: 6px 0 24px;
+  }
+
+  .blurb {
+    font-family: 'EB Garamond', Georgia, serif;
+    font-style: italic;
+    font-size: 18px;
+    line-height: 1.5;
+    color: var(--cacao);
+    margin: 0 0 32px;
   }
 
   form {
@@ -197,6 +206,12 @@ function renderLockPage({ error }) {
     letter-spacing: 0.02em;
     font-style: italic;
   }
+
+  @media (max-width: 480px) {
+    .script-line {
+      font-size: 64px;
+    }
+  }
 </style>
 </head>
 <body>
@@ -204,6 +219,7 @@ function renderLockPage({ error }) {
     <p class="kicker">Welcome to the</p>
     <p class="script-line">Sewell Wedding</p>
     <p class="kicker sub">Website</p>
+    <p class="blurb">This site is still under construction. Check back soon or enter the password to peek early.</p>
     <form method="POST" action="/__gate">
       <input
         type="password"
