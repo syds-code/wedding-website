@@ -12,6 +12,15 @@ export async function onRequest(context) {
   const { request, env, next } = context;
   const url = new URL(request.url);
 
+  // Let static assets through untouched — otherwise the lock page's own
+  // fonts/css/images get swallowed by the gate before they can load.
+  const isAsset = /\.(ttf|otf|woff2?|css|js|png|jpe?g|gif|svg|webp|ico)$/i.test(
+    url.pathname
+  );
+  if (isAsset) {
+    return next();
+  }
+
   // Let the correct-password cookie value through
   const expectedToken = await hashPassword(env.SITE_PASSWORD || "");
   const cookieHeader = request.headers.get("Cookie") || "";
