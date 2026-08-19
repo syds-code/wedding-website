@@ -6,12 +6,11 @@
 <title>Sewell Wedding - Weekend Details</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;1,9..144,300;1,9..144,400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;1,9..144,300;1,9..144,400&family=EB+Garamond:ital@0;1&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/brand.css">
 <style>
   :root {
     --font-display: 'Fraunces', serif;
-    --font-body: 'Fraunces', serif;
   }
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -196,82 +195,157 @@
 
   /* ---------- PAGE INTRO ---------- */
   .weekend-intro {
-    background: var(--jungle);
-    padding: 120px 6vw 60px;
+    background: var(--sand);
+    padding: 120px 6vw 30px;
     text-align: center;
   }
 
   .weekend-title {
     font-family: var(--font-script);
     font-weight: 400;
-    color: var(--sand);
-    -webkit-text-stroke: 1.3px var(--sand);
-    text-stroke: 1.3px var(--sand);
-    font-size: clamp(56px, 9vw, 130px);
+    color: var(--jungle);
+    -webkit-text-stroke: 1.3px var(--jungle);
+    text-stroke: 1.3px var(--jungle);
+    font-size: clamp(84px, 9vw, 130px);
     line-height: 1;
+  }
+
+  .weekend-intro-text {
+    font-family: var(--font-body);
+    font-style: italic;
+    font-weight: 400;
+    font-size: 19px;
+    line-height: 1.6;
+    color: var(--cacao);
+    max-width: 480px;
+    margin: 0 auto 0;
+  }
+
+  .weekend-intro-note {
+    font-family: var(--font-body);
+    font-style: italic;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 1.6;
+    color: var(--tulum);
+    max-width: 480px;
+    margin: 6px auto 0;
   }
 
   /* ---------- WEEKEND EVENTS TIMELINE ---------- */
   .timeline-wrap {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 60px;
-    align-items: stretch;
-    max-width: 1100px;
+    max-width: 640px;
     margin: 0 auto;
-    padding: 70px 6vw 90px;
-  }
-
-  @media (max-width: 800px) {
-    .timeline-wrap {
-      grid-template-columns: 1fr;
-      gap: 40px;
-      padding: 50px 6vw 60px;
-    }
-
-    .timeline-photo {
-      height: auto;
-      aspect-ratio: 3 / 4;
-    }
-  }
-
-  .timeline-photo {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    border-radius: 4px;
+    padding: 30px 6vw 90px;
   }
 
   .timeline-list {
-    border-left: 1px solid var(--tulum);
-    padding-left: 30px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 56px;
+    padding-left: 88px;
   }
 
-  .timeline-day {
-    margin-bottom: 40px;
-  }
-
-  .timeline-day:last-child {
-    margin-bottom: 0;
+  .timeline-list::before {
+    content: '';
+    position: absolute;
+    left: 76px;
+    top: 0;
+    bottom: 0;
+    width: 1px;
+    background: var(--tulum);
   }
 
   .timeline-day-heading {
     font-family: var(--font-display);
     font-style: italic;
     font-weight: 400;
-    font-size: clamp(20px, 2.6vw, 26px);
-    letter-spacing: 0.08em;
+    font-size: clamp(21px, 3.6vw, 36px);
+    letter-spacing: 0.06em;
     text-transform: uppercase;
-    color: var(--cacao);
-    margin-bottom: 16px;
+    color: var(--jungle);
+    margin-bottom: 22px;
+    text-align: left;
+    white-space: nowrap;
+  }
+
+  .timeline-day-events {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
   }
 
   .timeline-event {
-    margin-bottom: 20px;
+    position: relative;
+    text-align: left;
   }
 
-  .timeline-event:last-child {
-    margin-bottom: 0;
+  .timeline-event-icon {
+    position: absolute;
+    left: -88px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 64px;
+    height: 64px;
+    flex-shrink: 0;
+    background-color: var(--cacao);
+    -webkit-mask-size: contain;
+    mask-size: contain;
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    -webkit-mask-position: center;
+    mask-position: center;
+  }
+
+  .timeline-event-icon--welcome {
+    -webkit-mask-image: url('assets/weekend-details/welcome.svg');
+    mask-image: url('assets/weekend-details/welcome.svg');
+  }
+
+  .timeline-event-icon--ceremony {
+    -webkit-mask-image: url('assets/weekend-details/ceremony.svg');
+    mask-image: url('assets/weekend-details/ceremony.svg');
+  }
+
+  .timeline-event-icon--cocktail {
+    -webkit-mask-image: url('assets/weekend-details/cocktail.svg');
+    mask-image: url('assets/weekend-details/cocktail.svg');
+  }
+
+  .timeline-event-icon--reception {
+    -webkit-mask-image: url('assets/weekend-details/reception.svg');
+    mask-image: url('assets/weekend-details/reception.svg');
+  }
+
+  .timeline-event-icon--catamaran {
+    -webkit-mask-image: url('assets/weekend-details/catamaran.svg');
+    mask-image: url('assets/weekend-details/catamaran.svg');
+  }
+
+  .timeline-event-text {
+    min-width: 0;
+  }
+
+  @media (max-width: 480px) {
+    .timeline-list {
+      padding-left: 72px;
+    }
+
+    .timeline-list::before {
+      left: 60px;
+    }
+
+    .timeline-event-icon {
+      left: -72px;
+      width: 48px;
+      height: 48px;
+    }
+
+    .timeline-day-heading {
+      font-size: 19px;
+      letter-spacing: 0.03em;
+    }
   }
 
   .timeline-event-title {
@@ -292,11 +366,27 @@
 
   /* ---------- DRESS CODE ---------- */
   .dress-code {
-    background: var(--agave);
+    position: relative;
+    background: var(--sand);
     padding: 80px 6vw;
+    overflow: hidden;
+  }
+
+  .dress-code::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: url('assets/backgrounds/green-stripes.png');
+    background-repeat: repeat;
+    background-size: 1300px 1300px;
+    opacity: 0.2;
+    pointer-events: none;
+    z-index: 0;
   }
 
   .dress-code-heading {
+    position: relative;
+    z-index: 1;
     font-family: var(--font-display);
     font-style: italic;
     font-weight: 400;
@@ -309,6 +399,8 @@
   }
 
   .dress-code-intro {
+    position: relative;
+    z-index: 1;
     max-width: 62ch;
     margin: 0 auto 60px;
     font-family: var(--font-body);
@@ -319,6 +411,8 @@
   }
 
   .dress-code-grid {
+    position: relative;
+    z-index: 1;
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
     gap: 40px;
@@ -362,6 +456,14 @@
     font-size: 15px;
     color: var(--cacao);
     opacity: 0.9;
+    margin-bottom: 14px;
+  }
+
+  .dress-code-detail {
+    font-family: var(--font-body);
+    font-size: 16px;
+    line-height: 1.7;
+    color: var(--cacao);
   }
 
   /* ---------- FOOTER TEASER ---------- */
@@ -420,44 +522,65 @@
 
   <header class="weekend-intro">
     <h1 class="weekend-title">Weekend Details</h1>
+    <p class="weekend-intro-text">If you're making the trip, we want to make the most of it. Below is everything we have in store for the weekend.</p>
+    <p class="weekend-intro-note">When you RSVP, you'll be able to select which events you're joining us for.</p>
   </header>
 
   <section class="timeline-wrap">
-    <img class="timeline-photo" src="assets/hotel_gallery/hotel-4.jpg" alt="[Weekend details photo placeholder]">
-
     <div class="timeline-list">
       <div class="timeline-day">
         <div class="timeline-day-heading">Friday, March 3</div>
-        <div class="timeline-event">
-          <div class="timeline-event-title">7 pm &mdash; Welcome Party</div>
-          <div class="timeline-event-detail">Tentative Location</div>
-          <div class="timeline-event-detail">Attire: white cocktail</div>
+        <div class="timeline-day-events">
+          <div class="timeline-event">
+            <div class="timeline-event-icon timeline-event-icon--welcome"></div>
+            <div class="timeline-event-text">
+              <div class="timeline-event-title">7 pm &mdash; Welcome Party</div>
+              <div class="timeline-event-detail">Tentative Location</div>
+              <div class="timeline-event-detail">Attire: white cocktail</div>
+            </div>
+          </div>
         </div>
       </div>
 
       <div class="timeline-day">
         <div class="timeline-day-heading">Saturday, March 4</div>
-        <div class="timeline-event">
-          <div class="timeline-event-title">3 pm &mdash; Ceremony</div>
-          <div class="timeline-event-detail">Tentative Location</div>
-          <div class="timeline-event-detail">Attire: beach formal</div>
-        </div>
-        <div class="timeline-event">
-          <div class="timeline-event-title">4 pm &mdash; Cocktails</div>
-          <div class="timeline-event-detail">Tentative Location</div>
-        </div>
-        <div class="timeline-event">
-          <div class="timeline-event-title">5 pm &mdash; Dinner and Dancing</div>
-          <div class="timeline-event-detail">Tentative Location</div>
+        <div class="timeline-day-events">
+          <div class="timeline-event">
+            <div class="timeline-event-icon timeline-event-icon--ceremony"></div>
+            <div class="timeline-event-text">
+              <div class="timeline-event-title">3 pm &mdash; Ceremony</div>
+              <div class="timeline-event-detail">Tentative Location</div>
+              <div class="timeline-event-detail">Attire: beach formal</div>
+            </div>
+          </div>
+          <div class="timeline-event">
+            <div class="timeline-event-icon timeline-event-icon--cocktail"></div>
+            <div class="timeline-event-text">
+              <div class="timeline-event-title">4 pm &mdash; Cocktails</div>
+              <div class="timeline-event-detail">Tentative Location</div>
+            </div>
+          </div>
+          <div class="timeline-event">
+            <div class="timeline-event-icon timeline-event-icon--reception"></div>
+            <div class="timeline-event-text">
+              <div class="timeline-event-title">5 pm &mdash; Dinner and Dancing</div>
+              <div class="timeline-event-detail">Tentative Location</div>
+            </div>
+          </div>
         </div>
       </div>
 
       <div class="timeline-day">
         <div class="timeline-day-heading">Sunday, March 5</div>
-        <div class="timeline-event">
-          <div class="timeline-event-title">1 pm &mdash; Catamaran Cruise</div>
-          <div class="timeline-event-detail">Tentative Location</div>
-          <div class="timeline-event-detail">Attire: swimsuits + bring towels</div>
+        <div class="timeline-day-events">
+          <div class="timeline-event">
+            <div class="timeline-event-icon timeline-event-icon--catamaran"></div>
+            <div class="timeline-event-text">
+              <div class="timeline-event-title">1 pm &mdash; Catamaran Cruise</div>
+              <div class="timeline-event-detail">Tentative Location</div>
+              <div class="timeline-event-detail">Attire: swimsuits + bring towels</div>
+            </div>
+          </div>
         </div>
       </div>
 
@@ -466,17 +589,19 @@
 
   <section class="dress-code">
     <div class="dress-code-heading">Dress Code</div>
-    <p class="dress-code-intro">We want everyone to feel their best all weekend long. Since our events will be outdoors, we'd encourage a block heel over a stiletto and lightweight, breathable fabrics. For the welcome party, feel free to wear white or light colors &mdash; and for the wedding day, we just ask that you leave white to the bride.</p>
+    <p class="dress-code-intro">We want everyone comfortable and feeling their best all weekend. Since some of our events are taking place outdoors in the Caribbean heat, we suggest lightweight, breathable fabrics and opting for block heels instead of stilettos.</p>
     <div class="dress-code-grid">
       <div class="dress-code-card">
         <div class="dress-code-moodboard">[Mood board goes here]</div>
         <div class="dress-code-event">Welcome Party</div>
-        <div class="dress-code-attire">White Cocktail</div>
+        <div class="dress-code-attire">White Resort Cocktail</div>
+        <p class="dress-code-detail">We are requesting guests wear shades of white, cream, and other soft neutrals. For women, sundresses, rompers, or separates are all great options. For men, collared shirts, polos, or linen shirts paired with chinos or tailored shorts are appropriate.</p>
       </div>
       <div class="dress-code-card">
         <div class="dress-code-moodboard">[Mood board goes here]</div>
         <div class="dress-code-event">Wedding Day</div>
         <div class="dress-code-attire">Beach Formal</div>
+        <p class="dress-code-detail">For women, midi or floor-length dresses, dressy jumpsuits, or polished separates. For men, suits or dress pants with a button-down shirt; jackets recommended. Color is encouraged, but please reserve white for the bride.</p>
       </div>
     </div>
   </section>
