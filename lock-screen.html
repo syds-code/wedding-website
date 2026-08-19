@@ -97,24 +97,23 @@
   }
 
   @media (max-width: 640px) {
-    body {
-      align-items: stretch;
-      padding: 32px 24px;
-    }
-
-    .gate {
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      min-height: calc(100vh - 64px);
-      min-height: calc(100dvh - 64px);
-    }
-
     .script-line {
       flex-direction: column;
       align-items: center;
       row-gap: 0.02em;
       font-size: clamp(70px, 28vw, 170px);
+    }
+
+    /* "Sewell" alone carries a trailing swash that isn't counted in the
+       font's own letter-spacing box, so centering by box width alone
+       leaves it looking shifted right. This nudges it back by the
+       measured overhang (~0.15em) so the ink itself sits centered. */
+    .script-line span:first-child {
+      transform: translateX(-0.15em);
+    }
+
+    .gate-bottom {
+      margin-top: 40px;
     }
   }
 
