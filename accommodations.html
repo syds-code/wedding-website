@@ -596,13 +596,29 @@
   }
 
   .room-entry--reverse {
+    position: relative;
     display: block;
     background: var(--tulum);
     max-width: none;
     padding: 0;
+    overflow: hidden;
+  }
+
+  .room-entry--reverse::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: url('assets/backgrounds/cacao-palms.png');
+    background-repeat: repeat;
+    background-size: 640px 640px;
+    opacity: 0.1;
+    pointer-events: none;
+    z-index: 0;
   }
 
   .room-entry--reverse > .room-entry-inner {
+    position: relative;
+    z-index: 1;
     max-width: 1100px;
     margin: 0 auto;
     padding: 50px 6vw;
