@@ -158,7 +158,7 @@ function renderLockPage({ error }) {
   }
 
   .sub {
-    margin: 6px 0 24px;
+    margin: -8px 0 24px;
   }
 
   .blurb {
@@ -167,7 +167,8 @@ function renderLockPage({ error }) {
     font-size: 18px;
     line-height: 1.5;
     color: var(--cacao);
-    margin: 0 0 32px;
+    margin-top: 0;
+    margin-bottom: 32px;
   }
 
   form {
