@@ -380,7 +380,7 @@
     -webkit-text-stroke: 1.5px var(--sand);
     text-stroke: 1.5px var(--sand);
     text-shadow: 0 2px 16px rgba(73, 57, 31, 0.4);
-    font-size: clamp(72px, 12.5vw, 175px);
+    font-size: clamp(88px, 15vw, 320px);
     line-height: 1;
     max-width: 94vw;
     margin: 0 auto;
@@ -396,7 +396,7 @@
       flex-direction: column;
       align-items: center;
       gap: 0.06em 0;
-      font-size: clamp(60px, 19vw, 110px);
+      font-size: clamp(76px, 23vw, 130px);
     }
   }
 
@@ -528,9 +528,29 @@
 
   /* ---------- MEET US IN MEXICO ---------- */
   .meet-mexico {
+    position: relative;
     background: var(--shoreline);
     padding: 100px 6vw;
     text-align: center;
+    overflow: hidden;
+  }
+
+  .meet-mexico::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: url('assets/water-texture.png');
+    background-repeat: repeat;
+    background-size: 640px 640px;
+    opacity: 0.3;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .meet-mexico-wrap,
+  .meet-mexico-blurb {
+    position: relative;
+    z-index: 1;
   }
 
   .meet-mexico-wrap {
@@ -557,7 +577,7 @@
     color: var(--cacao);
     -webkit-text-stroke: 1.3px var(--cacao);
     text-stroke: 1.3px var(--cacao);
-    font-size: clamp(56px, 9vw, 130px);
+    font-size: clamp(70px, 11.5vw, 168px);
     line-height: 1;
   }
 
@@ -570,6 +590,12 @@
     line-height: 1.75;
     color: var(--cacao);
     text-align: left;
+  }
+
+  @media (min-width: 761px) {
+    .meet-mexico-blurb {
+      max-width: 88ch;
+    }
   }
 
   .meet-mexico-blurb p {
