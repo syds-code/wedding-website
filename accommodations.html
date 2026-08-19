@@ -6,12 +6,13 @@
 <title>Sewell Wedding - Accommodations</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;1,9..144,300;1,9..144,400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;1,9..144,300;1,9..144,400&family=EB+Garamond:ital@0;1&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/brand.css">
 <style>
   :root {
     --font-display: 'Fraunces', serif;
     --font-body: 'Fraunces', serif;
+    --font-body-garamond: 'EB Garamond', serif;
   }
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -307,6 +308,11 @@
     padding: 30px 6vw 60px;
   }
 
+  .resort-info-header {
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
   .resort-info-grid {
     display: block;
     max-width: 600px;
@@ -316,7 +322,7 @@
   .resort-info-eyebrow {
     font-family: var(--font-display);
     font-style: italic;
-    font-size: 16px;
+    font-size: 20px;
     letter-spacing: 0.14em;
     text-transform: uppercase;
     color: var(--tulum);
@@ -373,7 +379,7 @@
   .resort-info-label {
     font-family: var(--font-display);
     font-style: italic;
-    font-size: 13px;
+    font-size: 16px;
     letter-spacing: 0.1em;
     text-transform: uppercase;
     color: var(--cacao);
@@ -405,9 +411,10 @@
 
   .amenities-grid {
     display: flex;
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
     justify-content: center;
-    gap: 40px 48px;
+    align-items: flex-start;
+    gap: 28px;
   }
 
   .amenity {
@@ -416,23 +423,53 @@
     align-items: center;
     text-align: center;
     gap: 12px;
-    width: 150px;
+    flex: 1 1 150px;
+    min-width: 0;
+    max-width: 150px;
+  }
+
+  @media (max-width: 800px) {
+    .amenities-grid {
+      flex-wrap: wrap;
+      gap: 32px 24px;
+    }
+
+    .amenity {
+      flex: 0 0 calc(50% - 12px);
+      max-width: calc(50% - 12px);
+    }
   }
 
   .amenity-icon {
     width: 44px;
     height: 44px;
-    color: var(--tulum);
+    background-color: var(--tulum);
+    -webkit-mask-size: contain;
+    mask-size: contain;
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    -webkit-mask-position: center;
+    mask-position: center;
   }
 
-  .amenity-icon svg {
-    width: 100%;
-    height: 100%;
-    fill: none;
-    stroke: currentColor;
-    stroke-width: 1.4;
-    stroke-linecap: round;
-    stroke-linejoin: round;
+  .amenity-icon--restaurants {
+    -webkit-mask-image: url('assets/icons/restaurants.svg');
+    mask-image: url('assets/icons/restaurants.svg');
+  }
+
+  .amenity-icon--bars {
+    -webkit-mask-image: url('assets/icons/bars.svg');
+    mask-image: url('assets/icons/bars.svg');
+  }
+
+  .amenity-icon--pools {
+    -webkit-mask-image: url('assets/icons/pools.svg');
+    mask-image: url('assets/icons/pools.svg');
+  }
+
+  .amenity-icon--poolside {
+    -webkit-mask-image: url('assets/icons/poolside.svg');
+    mask-image: url('assets/icons/poolside.svg');
   }
 
   .amenity-figure {
@@ -454,16 +491,32 @@
 
   /* ---------- ROOM CATEGORIES INTRO ---------- */
   .room-block-intro {
+    position: relative;
     background: var(--tulum);
     padding: 60px 6vw 50px;
     text-align: center;
+    overflow: hidden;
+  }
+
+  .room-block-intro::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: url('assets/backgrounds/cacao-palms.png');
+    background-repeat: repeat;
+    background-size: 640px 640px;
+    opacity: 0.1;
+    pointer-events: none;
+    z-index: 0;
   }
 
   .room-block-heading {
+    position: relative;
+    z-index: 1;
     font-family: var(--font-display);
     font-style: italic;
     font-weight: 400;
-    font-size: clamp(26px, 3.6vw, 40px);
+    font-size: clamp(22px, 3vw, 32px);
     letter-spacing: 0.06em;
     text-transform: uppercase;
     color: var(--sand);
@@ -471,9 +524,11 @@
   }
 
   .room-block-intro-text {
+    position: relative;
+    z-index: 1;
     max-width: 62ch;
     margin: 0 auto;
-    font-family: var(--font-body);
+    font-family: var(--font-body-garamond);
     font-size: 18px;
     line-height: 1.75;
     color: var(--cacao);
@@ -512,6 +567,8 @@
   }
 
   .room-block-fine-print {
+    position: relative;
+    z-index: 1;
     font-style: italic;
     font-size: 16px;
     text-align: center;
@@ -692,33 +749,25 @@
   <section class="amenities">
     <div class="amenities-grid">
       <div class="amenity">
-        <div class="amenity-icon">
-          <svg viewBox="0 0 24 24"><path d="M6 2v6M9 2v6M12 2v6"/><path d="M6 8c0 2 1.5 3 3 3s3-1 3-3"/><path d="M9 11v11"/><path d="M19 2c-2.5 2-3.5 5-3 8.5.2 1.3 1 2 2 2"/><path d="M18 12.5V22"/></svg>
-        </div>
+        <div class="amenity-icon amenity-icon--restaurants"></div>
         <div class="amenity-figure">14</div>
         <div class="amenity-label">Restaurants</div>
       </div>
 
       <div class="amenity">
-        <div class="amenity-icon">
-          <svg viewBox="0 0 24 24"><path d="M5 4h14a1 1 0 0 1 .8 1.6l-6.3 7.9v5.5"/><path d="M11.5 19h5"/><path d="M18.5 5.6l-6.3 7.9-6.3-7.9"/></svg>
-        </div>
+        <div class="amenity-icon amenity-icon--bars"></div>
         <div class="amenity-figure">8</div>
         <div class="amenity-label">Bars &amp; Lounges</div>
       </div>
 
       <div class="amenity">
-        <div class="amenity-icon">
-          <svg viewBox="0 0 24 24"><circle cx="12" cy="6" r="2.6"/><path d="M3 15c1.5-2 3-2 4.5 0s3 2 4.5 0 3-2 4.5 0 3 2 4.5 0"/><path d="M3 19.5c1.5-2 3-2 4.5 0s3 2 4.5 0 3-2 4.5 0 3 2 4.5 0"/></svg>
-        </div>
+        <div class="amenity-icon amenity-icon--pools"></div>
         <div class="amenity-figure">8</div>
         <div class="amenity-label">Outdoor Pools</div>
       </div>
 
       <div class="amenity">
-        <div class="amenity-icon">
-          <svg viewBox="0 0 24 24"><path d="M12 3c5 0 9 4 9 8H3c0-4 4-8 9-8z"/><path d="M12 3v16"/><path d="M12 19c0 1.2-1 2-2 2"/></svg>
-        </div>
+        <div class="amenity-icon amenity-icon--poolside"></div>
         <div class="amenity-figure">3</div>
         <div class="amenity-label">Poolside Bars</div>
       </div>
@@ -726,12 +775,14 @@
   </section>
 
   <section class="resort-info">
+    <div class="resort-info-header">
+      <div class="resort-info-eyebrow">Resort Information</div>
+
+      <p class="resort-info-intro">The Fives Beach Resort &amp; Residences All Inclusive is just south of Cancún on the shores of the Riviera Maya. The Fives blends laid-back beach living with elevated design &mdash; spacious suites with full kitchens and private terraces, a string of pools leading down to the sand, and enough restaurants and bars that no two nights have to look the same.</p>
+    </div>
+
     <div class="resort-info-grid">
       <div>
-        <div class="resort-info-eyebrow">Resort Information</div>
-
-        <p class="resort-info-intro">The Fives Beach Resort &amp; Residences All Inclusive is just south of Cancún on the shores of the Riviera Maya. The Fives blends laid-back beach living with elevated design &mdash; spacious suites with full kitchens and private terraces, a string of pools leading down to the sand, and enough restaurants and bars that no two nights have to look the same.</p>
-
         <div class="resort-info-list">
           <div class="resort-info-item">
             <div class="resort-info-icon">
