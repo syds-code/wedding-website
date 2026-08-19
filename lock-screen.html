@@ -29,6 +29,7 @@
   * { box-sizing: border-box; }
 
   body {
+    position: relative;
     margin: 0;
     min-height: 100vh;
     overflow-x: hidden;
@@ -41,8 +42,22 @@
     padding: 24px;
   }
 
+  body::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: url('/assets/blue-palms.png');
+    background-repeat: repeat;
+    background-size: 640px 640px;
+    opacity: 0.12;
+    pointer-events: none;
+    z-index: 0;
+  }
+
   .gate {
-    max-width: 600px;
+    position: relative;
+    z-index: 1;
+    max-width: 700px;
     width: 100%;
     text-align: center;
   }
@@ -60,20 +75,47 @@
 
   .script-line {
     display: flex;
+    flex-direction: row;
     flex-wrap: wrap;
     justify-content: center;
     align-items: baseline;
-    row-gap: 0;
-    column-gap: 0.35em;
+    row-gap: 0.06em;
+    column-gap: 0.3em;
     font-family: 'Sewell Wedding', cursive;
-    font-size: clamp(40px, 9vw, 92px);
+    font-weight: 400;
     color: var(--cacao);
-    margin: 12px 0;
-    line-height: 1.15;
+    -webkit-text-stroke: 1.3px var(--cacao);
+    text-stroke: 1.3px var(--cacao);
+    font-size: clamp(64px, 13vw, 200px);
+    line-height: 1;
+    max-width: 94vw;
+    margin: 16px auto;
   }
 
   .script-line span {
     white-space: nowrap;
+  }
+
+  @media (max-width: 640px) {
+    body {
+      align-items: stretch;
+      padding: 32px 24px;
+    }
+
+    .gate {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      min-height: calc(100vh - 64px);
+      min-height: calc(100dvh - 64px);
+    }
+
+    .script-line {
+      flex-direction: column;
+      align-items: center;
+      row-gap: 0.02em;
+      font-size: clamp(70px, 28vw, 170px);
+    }
   }
 
   form,
@@ -155,21 +197,25 @@
 </head>
 <body>
   <div class="gate">
-    <p class="kicker">Welcome to the</p>
-    <p class="script-line"><span>Sewell</span><span>Wedding</span></p>
-    <p class="kicker sub">Website</p>
-    <p class="blurb">This site is still under construction. Check back soon or enter the password to peek early.</p>
-    <form method="POST" action="/__gate">
-      <input
-        type="password"
-        name="password"
-        placeholder="Please enter password"
-        autofocus
-        required
-      >
-      {{ERROR}}
-      <button type="submit">Enter</button>
-    </form>
+    <div class="gate-top">
+      <p class="kicker">Welcome to the</p>
+      <p class="script-line"><span>Sewell</span><span>Wedding</span></p>
+      <p class="kicker sub">Website</p>
+    </div>
+    <div class="gate-bottom">
+      <p class="blurb">This site is still under construction. Check back soon or enter the password to peek early.</p>
+      <form method="POST" action="/__gate">
+        <input
+          type="password"
+          name="password"
+          placeholder="Please enter password"
+          autofocus
+          required
+        >
+        {{ERROR}}
+        <button type="submit">Enter</button>
+      </form>
+    </div>
   </div>
 </body>
 </html>
